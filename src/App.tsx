@@ -1,7 +1,7 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
-import "./App.css";
+
+import "./index.css";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -13,22 +13,20 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>Welcome to Tauri!</h1>
+    <div className="container columns-2 flex flex-row">
 
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+      <div className="basis-1/3">
+        <h2>Aujourd'hui</h2>
       </div>
 
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+      <div className="basis-2/3">
+      <h1>Bonjour</h1>
+      <div className="row">
+
+      </div>
+
+      <p>Aucun taches pour aujourd'hui</p>
 
       <form
         className="row"
@@ -45,7 +43,9 @@ function App() {
         <button type="submit">Greet</button>
       </form>
 
+
       <p>{greetMsg}</p>
+      </div>
     </div>
   );
 }
