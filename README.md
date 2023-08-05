@@ -1,5 +1,5 @@
 # Sharqist
-Perfect todo tool for a programmer at the workplace.
+Perfect todo tool for a programmer at their workplace.
 
 ## Features
 - Todo list
