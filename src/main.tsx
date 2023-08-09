@@ -1,8 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,10 +7,15 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import App from './App'
+import './index.css'
+
+import { PATHS } from './router/paths'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
-      <Route path='dashboard' element={<App />} />
+    <Route path={PATHS.DEFAULT} element={<App />}>
+      <Route path={PATHS.DASHBOARD} element={<App />} />
       {/* ... etc. */}
     </Route>,
   ),
