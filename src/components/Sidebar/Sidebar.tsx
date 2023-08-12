@@ -8,8 +8,8 @@ interface Subpage {
 }
 
 const DASHBOARD: Subpage = {
-  path: PATHS.DASHBOARD,
-  name: 'Dashboard',
+  path: PATHS.INBOX,
+  name: 'Inbox',
   icon: <InboxIcon />,
 }
 
@@ -27,6 +27,7 @@ function Sidebar() {
                 className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'
               >
                 {subpage.icon}
+                <div className='m-1'></div>
                 {subpage.name}
               </a>
             </li>
