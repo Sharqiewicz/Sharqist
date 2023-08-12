@@ -1,9 +1,12 @@
+import { FC, ReactNode } from 'react'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { Navbar } from '../components/Navbar/Navbar'
 
-import './index.css'
+interface MainTemplateProps {
+  children: ReactNode
+}
 
-function MainTemplate() {
+const MainTemplate: FC<MainTemplateProps> = ({ children }) => {
   return (
     <div>
       <Navbar />
@@ -12,7 +15,7 @@ function MainTemplate() {
           <Sidebar />
         </div>
 
-        <main className='basis-2/3'></main>
+        <main className='basis-2/3'>{children}</main>
       </div>
     </div>
   )

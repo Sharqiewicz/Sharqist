@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import App from './App'
 import './index.css'
 
 import { PATHS } from './router/paths'
