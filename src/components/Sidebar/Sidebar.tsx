@@ -1,20 +1,32 @@
 import { ReactElement } from 'react'
 import { PathKeys, PATHS } from '../../router/paths'
-import { InboxIcon } from '../../assets/icons/InboxIcon'
+import { InboxIcon, AddTaskIcon, TodayIcon } from '../../assets/icons'
 interface Subpage {
   path: PathKeys
   name: string
   icon: ReactElement
 }
 
-const DASHBOARD: Subpage = {
+const INBOX: Subpage = {
   path: PATHS.INBOX,
   name: 'Inbox',
   icon: <InboxIcon />,
 }
 
+const TODAY: Subpage = {
+  path: PATHS.TODAY,
+  name: 'Today',
+  icon: <TodayIcon />,
+}
+
+const ADD_TASK: Subpage = {
+  path: PATHS.ADD_TASK,
+  name: 'Add a task',
+  icon: <AddTaskIcon />,
+}
+
 function Sidebar() {
-  const SUBPAGES: Subpage[] = [DASHBOARD]
+  const SUBPAGES: Subpage[] = [ADD_TASK, TODAY, INBOX]
 
   return (
     <aside className='z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0'>
