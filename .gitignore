@@ -25,3 +25,6 @@ yarn.lock
 *.sln
 *.sw?
 .vscode/
+
+# Sqlite DB
+sharqist.db
