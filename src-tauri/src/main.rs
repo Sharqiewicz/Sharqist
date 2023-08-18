@@ -7,7 +7,7 @@ fn add_task(name: String, description: String, date: String) -> String {
     add_task_to_db(name, description, date)
 }
 
-fn open_connection() -> Connection {
+fn open_database_connection() -> Connection {
     return Connection::open("sharqist.db").expect("Failed to open connection to the database");
 }
 
@@ -18,6 +18,28 @@ struct Task {
     date: String,
 }
 
+#[tauri::command]
+fn get_all_tasks() -> Result<Vec<Task>, rusqlite::Error> {
+    let connection: Connection = open_database_connection();
+
+    let mut tasks: rusqlite::Statement<'_> = connection
+        .prepare("SELECT id, name, description, date FROM tasks")
+        .expect("Failed to prepare query");
+
+    let tasks_iter = tasks
+        .query_map([], |row| {
+            Ok(Task {
+                name: row.get(1)?,
+                description: row.get(2)?,
+                date: row.get(3)?,
+            })
+        })
+        .expect("Failed to prepare query");
+
+    let result: Result<Vec<_>> = tasks_iter.collect();
+    result
+}
+
 fn add_task_to_db(name: String, description: String, date: String) -> String {
     let new_task: Task = Task {
         name: name,
@@ -25,7 +47,7 @@ fn add_task_to_db(name: String, description: String, date: String) -> String {
         date: date,
     };
 
-    let connection: Connection = open_connection();
+    let connection: Connection = open_database_connection();
 
     match connection.execute(
         "INSERT INTO tasks (name, description, date) VALUES (?1, ?2, ?3)",
@@ -40,11 +62,11 @@ use rusqlite::{Connection, Result};
 
 fn main() -> Result<()> {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![add_task])
+        .invoke_handler(tauri::generate_handler![add_task, get_all_tasks])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
-    let connection: Connection = open_connection();
+    let connection: Connection = open_database_connection();
 
     connection.execute(
         "CREATE TABLE tasks (
@@ -56,23 +78,5 @@ fn main() -> Result<()> {
         (), // empty list of parameters.
     )?;
 
-    // connection.execute(
-    //     "INSERT INTO tasks (name, description, date) VALUES (?1, ?2, ?3)",
-    //     (&new_task.name, &new_task.description, &new_task.date),
-    // )?;
-
-    // let mut stmt = conn.prepare("SELECT id, name, description, date FROM tasks")?;
-    // let person_iter = stmt.query_map([], |row| {
-    //     Ok(Task {
-    //         id: row.get(0)?,
-    //         name: row.get(1)?,
-    //         description: row.get(2)?,
-    //         date: row.get(2)?,
-    //     })
-    // })?;
-
-    // for person in person_iter {
-    //     println!("Found person {:?}", person.unwrap());
-    // }
     Ok(())
 }
