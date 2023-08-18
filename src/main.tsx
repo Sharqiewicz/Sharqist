@@ -17,6 +17,8 @@ const router = createBrowserRouter(
     <Route path={PATHS.DEFAULT} element={<InboxPage />}>
       <Route path={PATHS.DASHBOARD} element={<InboxPage />} />
       <Route path={PATHS.INBOX} element={<InboxPage />} />
+      <Route path={PATHS.TODAY} element={<InboxPage />} />
+      <Route path={PATHS.ADD_TASK} element={<InboxPage />} />
     </Route>,
   ),
 )
