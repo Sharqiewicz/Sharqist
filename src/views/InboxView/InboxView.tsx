@@ -1,7 +1,14 @@
 import { useState } from 'react'
+import { invoke } from '@tauri-apps/api/tauri'
 
 function InboxView() {
   const [name, setName] = useState('')
+
+  const getAllTasks = async () => {
+    const abc = await invoke('get_all_tasks')
+
+    console.log(abc, 'abc')
+  }
   return (
     <>
       <h1>Bonjour</h1>
@@ -20,7 +27,7 @@ function InboxView() {
           onChange={e => setName(e.currentTarget.value)}
           placeholder='Enter a name...'
         />
-        <button type='submit'>Greet</button>
+        <button onClick={getAllTasks}>Greet</button>
       </form>
     </>
   )

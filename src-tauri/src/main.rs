@@ -65,23 +65,44 @@ fn add_task_to_db(name: String, description: String, date: String) -> String {
     }
 }
 
+fn does_table_exist(connection: &Connection, table_name: &str) -> Result<bool> {
+    // SQLite query to check if a table exists
+    let query: String = format!(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='{}'",
+        table_name
+    );
+
+    // Execute the query and check if any rows are returned
+    let result: Result<String, rusqlite::Error> = connection.query_row(&query, [], |row| {
+        row.get(0) // Retrieve the first column of the first row
+    });
+
+    // Check the result to determine if the table exists
+    match result {
+        Ok(_) => Ok(true),   // Table exists
+        Err(_) => Ok(false), // Table doesn't exist or an error occurred
+    }
+}
+
 fn main() -> Result<()> {
+    let connection: Connection = open_database_connection();
+
+    if (!does_table_exist(&connection, "tasks")?) {
+        connection.execute(
+            "CREATE TABLE tasks (
+                id    INTEGER PRIMARY KEY,
+                name  TEXT NOT NULL,
+                description  TEXT
+                date  TEXT
+            )",
+            (), // empty list of parameters.
+        )?;
+    }
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![add_task, get_all_tasks])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-
-    let connection: Connection = open_database_connection();
-
-    connection.execute(
-        "CREATE TABLE tasks (
-            id    INTEGER PRIMARY KEY,
-            name  TEXT NOT NULL,
-            description  TEXT
-            date  TEXT
-        )",
-        (), // empty list of parameters.
-    )?;
 
     Ok(())
 }
