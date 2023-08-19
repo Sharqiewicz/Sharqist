@@ -3,8 +3,8 @@
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn add_task(name: String, description: String, date: String) -> String {
+    add_task_to_db(name, description, date)
 }
 
 fn open_connection() -> Connection {
@@ -18,7 +18,7 @@ struct Task {
     date: String,
 }
 
-fn add_task(name: String, description: String, date: String) {
+fn add_task_to_db(name: String, description: String, date: String) -> String {
     let new_task: Task = Task {
         name: name,
         description: description,
@@ -26,13 +26,21 @@ fn add_task(name: String, description: String, date: String) {
     };
 
     let connection: Connection = open_connection();
+
+    match connection.execute(
+        "INSERT INTO tasks (name, description, date) VALUES (?1, ?2, ?3)",
+        (&new_task.name, &new_task.description, &new_task.date),
+    ) {
+        Ok(_) => "Task added".to_string(),
+        Err(_) => "Task addition failed.".to_string(),
+    }
 }
 
 use rusqlite::{Connection, Result};
 
 fn main() -> Result<()> {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![add_task])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
