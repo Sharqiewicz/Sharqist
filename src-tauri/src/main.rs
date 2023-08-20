@@ -87,7 +87,7 @@ fn does_table_exist(connection: &Connection, table_name: &str) -> Result<bool> {
 fn main() -> Result<()> {
     let connection: Connection = open_database_connection();
 
-    if (!does_table_exist(&connection, "tasks")?) {
+    if !does_table_exist(&connection, "tasks")? {
         connection.execute(
             "CREATE TABLE tasks (
                 id    INTEGER PRIMARY KEY,
