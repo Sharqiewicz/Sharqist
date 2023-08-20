@@ -1,7 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 fn add_task(name: String, description: String, date: String) -> String {
     add_task_to_db(name, description, date)
@@ -11,15 +10,21 @@ fn open_database_connection() -> Connection {
     return Connection::open("sharqist.db").expect("Failed to open connection to the database");
 }
 
-#[derive(Debug)]
+#[derive(serde::Serialize)]
 struct Task {
     name: String,
     description: String,
     date: String,
 }
 
+use rusqlite::{Connection, Result};
+
 #[tauri::command]
-fn get_all_tasks() -> Result<Vec<Task>, rusqlite::Error> {
+fn get_all_tasks() -> Result<Vec<Task>, String> {
+    get_all_tasks_from_db()
+}
+
+fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
     let connection: Connection = open_database_connection();
 
     let mut tasks: rusqlite::Statement<'_> = connection
@@ -36,8 +41,10 @@ fn get_all_tasks() -> Result<Vec<Task>, rusqlite::Error> {
         })
         .expect("Failed to prepare query");
 
-    let result: Result<Vec<_>> = tasks_iter.collect();
-    result
+    match tasks_iter.collect::<Result<Vec<_>, _>>() {
+        Ok(tasks) => Ok(tasks),
+        Err(_) => Err("Error while getting all tasks".into()),
+    }
 }
 
 fn add_task_to_db(name: String, description: String, date: String) -> String {
@@ -57,8 +64,6 @@ fn add_task_to_db(name: String, description: String, date: String) -> String {
         Err(_) => "Task addition failed.".to_string(),
     }
 }
-
-use rusqlite::{Connection, Result};
 
 fn main() -> Result<()> {
     tauri::Builder::default()
