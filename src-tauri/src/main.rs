@@ -92,7 +92,7 @@ fn main() -> Result<()> {
             "CREATE TABLE tasks (
                 id    INTEGER PRIMARY KEY,
                 name  TEXT NOT NULL,
-                description  TEXT
+                description  TEXT,
                 date  TEXT
             )",
             (), // empty list of parameters.

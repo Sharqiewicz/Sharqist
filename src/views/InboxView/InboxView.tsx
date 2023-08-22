@@ -1,20 +1,41 @@
 import { useState } from 'react'
 import { invoke } from '@tauri-apps/api/tauri'
+import { ITask } from '../../interfaces/ITask'
+import { Task } from '../../components/Task/Task'
 
 function InboxView() {
   const [name, setName] = useState('')
+  const [tasks, setTasks] = useState<ITask[]>([])
 
   const getAllTasks = async () => {
-    const abc = await invoke('get_all_tasks')
-
-    console.log(abc, 'abc')
+    await addTask()
+    setTasks(await invoke('get_all_tasks'))
   }
+
+  const addTask = async () => {
+    const task: ITask = {
+      date: '2023-12-12',
+      description: 'This is an example task',
+      name: 'An example task',
+    }
+
+    await invoke('add_task', { ...task })
+  }
+
+  const renderTasks = () => {
+    if (tasks.length) {
+      return tasks.map(task => <Task {...task} />)
+    } else {
+      return <p>Aucun taches pour aujourd'hui</p>
+    }
+  }
+
   return (
     <>
       <h1>Bonjour</h1>
       <div className='row'></div>
 
-      <p>Aucun taches pour aujourd'hui</p>
+      {renderTasks()}
 
       <form
         className='row'
