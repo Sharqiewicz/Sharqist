@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { invoke } from '@tauri-apps/api/tauri'
 import { ITask } from '../../interfaces/ITask'
 import { Task } from '../../components/Task/Task'
@@ -11,6 +11,12 @@ function InboxView() {
     await addTask()
     setTasks(await invoke('get_all_tasks'))
   }
+
+  useEffect(() => {
+    ;(async () => {
+      setTasks(await invoke('get_all_tasks'))
+    })()
+  }, [])
 
   const addTask = async () => {
     const task: ITask = {
