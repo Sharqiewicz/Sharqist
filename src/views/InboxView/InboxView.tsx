@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { invoke } from '@tauri-apps/api/tauri'
 import { ITask } from '../../interfaces/ITask'
 import { Task } from '../../components/Task/Task'
+import { AddTaskModal } from '../../modals/AddTaskModal/AddTaskModal'
 
 function InboxView() {
   const [name, setName] = useState('')
+  const [isAddTaskModalOpen, setAddTaskModalOpen] = useState<boolean>(false)
   const [tasks, setTasks] = useState<ITask[]>([])
 
   const getAllTasks = async () => {
@@ -41,6 +43,8 @@ function InboxView() {
       <h1>Bonjour</h1>
       <div className='row'></div>
 
+      <button onClick={() => setAddTaskModalOpen(true)}>Add a task</button>
+
       {renderTasks()}
 
       <form
@@ -56,6 +60,10 @@ function InboxView() {
         />
         <button onClick={getAllTasks}>Greet</button>
       </form>
+      <AddTaskModal
+        isOpen={isAddTaskModalOpen}
+        closeModal={() => setAddTaskModalOpen(false)}
+      />
     </>
   )
 }
