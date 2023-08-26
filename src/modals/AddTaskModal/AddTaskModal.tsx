@@ -1,9 +1,14 @@
 import { createPortal } from 'react-dom'
+import { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const AddTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
+  const [startDate, setStartDate] = useState(new Date())
+
   return isOpen ? (
     createPortal(
       <section
@@ -16,7 +21,7 @@ export const AddTaskModal: React.FC<{
           <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
             <div className='flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600'>
               <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-                Create New Product
+                Add Task
               </h3>
               <button
                 type='button'
@@ -49,7 +54,7 @@ export const AddTaskModal: React.FC<{
                     htmlFor='name'
                     className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                   >
-                    Name
+                    Task name
                   </label>
                   <input
                     type='text'
@@ -60,22 +65,10 @@ export const AddTaskModal: React.FC<{
                     required={true}
                   />
                 </div>
-                <div className='col-span-2 sm:col-span-1'>
-                  <label
-                    htmlFor='price'
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-                  >
-                    Price
-                  </label>
-                  <input
-                    type='number'
-                    name='price'
-                    id='price'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                    placeholder='$2999'
-                    required={true}
-                  />
-                </div>
+                <DatePicker
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                />
                 <div className='col-span-2 sm:col-span-1'>
                   <label
                     htmlFor='category'
@@ -99,7 +92,7 @@ export const AddTaskModal: React.FC<{
                     htmlFor='description'
                     className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                   >
-                    Product Description
+                    Description
                   </label>
                   <textarea
                     id='description'
