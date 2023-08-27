@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react'
 import { Sidebar } from '../components/Sidebar/Sidebar'
-import { Navbar } from '../components/Navbar/Navbar'
 
 interface MainTemplateProps {
   children: ReactNode
@@ -9,7 +8,6 @@ interface MainTemplateProps {
 const MainTemplate: FC<MainTemplateProps> = ({ children }) => {
   return (
     <>
-      <Navbar />
       <div className='container flex flex-row'>
         <div className='sm:basis-2/5 lg:basis-1/4'>
           <Sidebar />
