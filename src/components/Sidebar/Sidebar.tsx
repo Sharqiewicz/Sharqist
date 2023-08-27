@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { PathKeys, PATHS } from '../../router/paths'
-import { InboxIcon, TodayIcon } from '../../assets/icons'
+import { InboxIcon, AddTaskIcon, TodayIcon } from '../../assets/icons'
 interface Subpage {
   path: PathKeys
   name: string
@@ -19,8 +19,14 @@ const TODAY: Subpage = {
   icon: <TodayIcon />,
 }
 
+const ADD_TASK: Subpage = {
+  path: PATHS.ADD_TASK,
+  name: 'Add a task',
+  icon: <AddTaskIcon />,
+}
+
 function Sidebar() {
-  const SUBPAGES: Subpage[] = [TODAY, INBOX]
+  const SUBPAGES: Subpage[] = [ADD_TASK, TODAY, INBOX]
 
   return (
     <aside className='z-30 w-64 top-0 h-screen fixed transition-transform -translate-x-full sm:translate-x-0'>
