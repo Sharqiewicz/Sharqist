@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { PathKeys, PATHS } from '../../router/paths'
-import { InboxIcon, AddTaskIcon, TodayIcon } from '../../assets/icons'
+import { InboxIcon, TodayIcon } from '../../assets/icons'
 interface Subpage {
   path: PathKeys
   name: string
