@@ -12,6 +12,9 @@ import './index.css'
 import { PATHS } from './router/paths'
 import InboxPage from './pages/InboxPage/InboxPage'
 
+import { ModalsProvider } from './modals/ModalsContext'
+import { ModalsManager } from './modals/ModalsManager'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={PATHS.DEFAULT} element={<InboxPage />}>
@@ -25,6 +28,9 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ModalsProvider>
+      <RouterProvider router={router} />
+      <ModalsManager />
+    </ModalsProvider>
   </React.StrictMode>,
 )
