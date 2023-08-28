@@ -21,7 +21,7 @@ const TODAY: Subpage = {
 
 const ADD_TASK: Subpage = {
   path: PATHS.ADD_TASK,
-  name: 'Add a task',
+  name: 'Add Task',
   icon: <AddTaskIcon />,
 }
 
@@ -31,7 +31,7 @@ function Sidebar() {
   return (
     <aside className='z-30 w-64 top-0 h-screen fixed transition-transform -translate-x-full sm:translate-x-0'>
       <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
-        <div className='flex ms-2 md:me-24'>
+        <div className='flex ms-2 md:me-24 mb-5'>
           <img src='./sharqist.svg' className='h-8 me-3' alt='FlowBite Logo' />
           <span className='self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white'>
             Sharqist

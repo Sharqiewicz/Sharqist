@@ -40,26 +40,21 @@ function InboxView() {
 
   return (
     <>
-      <h1>Bonjour</h1>
+      <h1 className='text-xl'>Today</h1>
       <div className='row'></div>
-
-      <button onClick={() => setAddTaskModalOpen(true)}>Add a task</button>
 
       {renderTasks()}
 
-      <form
-        className='row'
-        onSubmit={e => {
-          e.preventDefault()
-        }}
+      <hr className='my-5' />
+
+      <button
+        onClick={() => setAddTaskModalOpen(true)}
+        type='button'
+        className='text-white bg-gradient-to-br from-purple-600 to-pink-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
       >
-        <input
-          id='greet-input'
-          onChange={e => setName(e.currentTarget.value)}
-          placeholder='Enter a name...'
-        />
-        <button onClick={getAllTasks}>Greet</button>
-      </form>
+        Add Task
+      </button>
+
       <AddTaskModal
         isOpen={isAddTaskModalOpen}
         closeModal={() => setAddTaskModalOpen(false)}
