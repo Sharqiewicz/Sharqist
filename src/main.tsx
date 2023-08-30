@@ -14,6 +14,7 @@ import InboxPage from './pages/InboxPage/InboxPage'
 
 import { ModalsProvider } from './modals/ModalsContext'
 import { ModalsManager } from './modals/ModalsManager'
+import { SidebarProvider } from './hooks'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,8 +30,10 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ModalsProvider>
-      <RouterProvider router={router} />
-      <ModalsManager />
+      <SidebarProvider>
+        <RouterProvider router={router} />
+        <ModalsManager />
+      </SidebarProvider>
     </ModalsProvider>
   </React.StrictMode>,
 )
