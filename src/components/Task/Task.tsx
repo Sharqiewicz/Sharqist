@@ -10,7 +10,7 @@ export const Task = (task: ITask) => {
   }`
 
   return (
-    <div className='max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full mb-3'>
       <h1 className='mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white'>
         {name}
       </h1>

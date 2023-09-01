@@ -25,20 +25,22 @@ function InboxView() {
 
   return (
     <>
-      <h1 className='text-xl'>Today</h1>
+      <h1 className='text-2xl font-bold mb-3 text-gray-700'>Inbox</h1>
       <div className='row'></div>
 
       {renderTasks()}
 
       <hr className='my-5' />
 
-      <button
-        onClick={() => openModal(MODALS.ADD_TASK_MODAL)}
-        type='button'
-        className='text-white bg-gradient-to-br from-purple-600 to-pink-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-      >
-        Add Task
-      </button>
+      <div className='w-full flex justify-center'>
+        <button
+          onClick={() => openModal(MODALS.ADD_TASK_MODAL)}
+          type='button'
+          className='text-white bg-gradient-to-br from-purple-600 to-pink-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+        >
+          Add Task
+        </button>
+      </div>
     </>
   )
 }
