@@ -1,3 +1,5 @@
 export * from './AddTaskIcon'
 export * from './InboxIcon'
 export * from './TodayIcon'
+export * from './PenIcon'
+export * from './TrashIcon'
