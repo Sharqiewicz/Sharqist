@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 export interface DropdownOption {
   name: string
-  icon: string
+  icon: () => JSX.Element
   onClick: () => void
 }
 interface DropdownProps {
@@ -86,6 +86,7 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
     >
       {options.map(option => (
         <li>
+          {option.icon()}
           <p
             className={`
                         block

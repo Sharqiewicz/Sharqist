@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { ITask } from '../../interfaces/ITask'
 import { Dropdown, DropdownOption } from '../Dropdown/Dropdown'
+import { PenIcon, TrashIcon } from '../../assets/icons'
 
 export const Task = (task: ITask) => {
   const { name, description, date } = task
@@ -16,12 +17,12 @@ export const Task = (task: ITask) => {
   const dropdownOptions: DropdownOption[] = [
     {
       name: 'Edit',
-      icon: 'edit',
+      icon: PenIcon,
       onClick: editTask,
     },
     {
       name: 'Delete',
-      icon: 'delete',
+      icon: TrashIcon,
       onClick: deleteTask,
     },
   ]
