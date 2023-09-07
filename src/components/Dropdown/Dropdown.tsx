@@ -70,7 +70,8 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
             divide-gray-100
             rounded-lg
             shadow
-            w-44
+            w-40
+            px-2
             dark:bg-gray-700
             dark:divide-gray-600
         `}
@@ -87,8 +88,11 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
       {options.map(option => (
         <li
           className={`
+            box-border
+            px-5
             p-2
             flex
+            rounded-lg
             items-center
             justify-between
             hover:bg-gray-100
