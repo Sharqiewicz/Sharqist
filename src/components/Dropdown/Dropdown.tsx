@@ -85,16 +85,21 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
       aria-labelledby='dropdownMenuIconHorizontalButton'
     >
       {options.map(option => (
-        <li>
+        <li
+          className={`
+            p-2
+            flex
+            items-center
+            justify-between
+            hover:bg-gray-100
+            dark:hover:bg-gray-600
+            dark:hover:text-white
+        `}
+        >
           {option.icon()}
           <p
             className={`
                         block
-                        px-4
-                        py-2
-                        hover:bg-gray-100
-                        dark:hover:bg-gray-600
-                        dark:hover:text-white
                     `}
           >
             {option.name}
