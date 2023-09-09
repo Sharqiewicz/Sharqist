@@ -49,13 +49,13 @@ function Sidebar() {
   const { isSidebarOpen } = useSidebar()
 
   const asideClass = `z-30 ${
-    isSidebarOpen ? 'w-full' : 'w-0'
-  } md:w-1/4 top-0 h-screen fixed overflow-hidden duration-300 ease-in-out`
+    isSidebarOpen ? 'w-full' : 'w-0 sm:w-52'
+  } top-0 h-screen fixed overflow-hidden duration-300 ease-in-out`
 
   return (
     <aside className={asideClass}>
       <div className='h-full px-3 py-4 bg-gray-50 dark:bg-gray-800'>
-        <div className='flex ms-2 md:me-24 mb-5'>
+        <div className='flex mb-5 ms-2 md:me-24'>
           <img src='./sharqist.svg' className='h-8 me-3' alt='Sharqist Logo' />
           <span className='self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white'>
             Sharqist

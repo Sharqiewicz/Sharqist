@@ -12,7 +12,7 @@ const renderNavbar = (
   closeSidebar: () => void,
   isSidebarOpen: boolean,
 ) => (
-  <nav className='z-40 h-16 fixed w-full sm:w-0 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700'>
+  <nav className='fixed z-40 w-full h-16 bg-white border-b border-gray-200 sm:w-0 dark:bg-gray-800 dark:border-gray-700'>
     <div className='px-3 py-3 lg:px-5 lg:pl-3'>
       <div className='flex items-center justify-between'>
         {!isSidebarOpen && (
