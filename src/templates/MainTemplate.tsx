@@ -12,9 +12,7 @@ const MainTemplate: FC<MainTemplateProps> = ({ children }) => {
       <Navbar />
       <div className='h-16 sm:h-0'></div>
       <div className='flex flex-row'>
-        <div className=''>
-          <Sidebar />
-        </div>
+        <Sidebar />
 
         <main className='w-full p-5 sm:ml-52'>{children}</main>
       </div>
