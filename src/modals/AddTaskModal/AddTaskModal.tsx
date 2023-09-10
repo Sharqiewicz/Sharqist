@@ -3,7 +3,16 @@ import { FormEvent, FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const formReducer = (state, event) => {
+type FormState = {
+  [key: string]: string | number | boolean
+}
+
+type FormAction = {
+  name: string
+  value: string | number | boolean
+}
+
+const formReducer = (state: FormState, event: FormAction) => {
   return {
     ...state,
     [event.name]: event.value,
@@ -82,8 +91,8 @@ const renderTaskModal = ({
               selected={startDate}
               onChange={date => setStartDate(date as Date)}
             />
-            {renderCategory()}
-            {renderDescription()}
+            {renderCategory(handleChange)}
+            {renderDescription(handleChange)}
           </div>
           {renderSubmitButton()}
         </form>
@@ -143,7 +152,7 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
   </div>
 )
 
-const renderCategory = () => (
+const renderCategory = (handleChange: (event: ChangeEvent) => void) => (
   <div className='col-span-2 sm:col-span-1'>
     <label
       htmlFor='category'
@@ -152,6 +161,7 @@ const renderCategory = () => (
       Category
     </label>
     <select
+      onSelect={e => handleChange(e as unknown as ChangeEvent)}
       id='category'
       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
     >
@@ -164,7 +174,7 @@ const renderCategory = () => (
   </div>
 )
 
-const renderDescription = () => (
+const renderDescription = (handleChange: (event: ChangeEvent) => void) => (
   <div className='col-span-2'>
     <label
       htmlFor='description'
@@ -173,6 +183,7 @@ const renderDescription = () => (
       Description
     </label>
     <textarea
+      onChange={e => handleChange(e as unknown as ChangeEvent)}
       id='description'
       rows={4}
       className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
