@@ -3,6 +3,12 @@ import { FormEvent, FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
+type UserProjects = string[]
+
+function getUserProjects(): UserProjects {
+  return ['Project 1', 'Project 2', 'Project 3']
+}
+
 type FormState = {
   [key: string]: string | number | boolean
 }
@@ -41,6 +47,8 @@ export const AddTaskModal: React.FC<{
     console.log(formData)
   }
 
+  const userProjects = getUserProjects()
+
   return isOpen ? (
     createPortal(
       renderTaskModal({
@@ -50,6 +58,7 @@ export const AddTaskModal: React.FC<{
         setStartDate,
         handleChange,
         onSubmit,
+        userProjects,
       }),
       document.getElementById('root') || document.body,
     )
@@ -65,6 +74,7 @@ interface RenderTaskModalProps {
   setStartDate: React.Dispatch<React.SetStateAction<Date>>
   handleChange: (event: ChangeEvent) => void
   onSubmit: FormEventHandler<HTMLFormElement>
+  userProjects: string[]
 }
 
 const renderTaskModal = ({
@@ -74,6 +84,7 @@ const renderTaskModal = ({
   setStartDate,
   handleChange,
   onSubmit,
+  userProjects,
 }: RenderTaskModalProps) => (
   <section
     id='crud-modal'
@@ -91,7 +102,11 @@ const renderTaskModal = ({
               selected={startDate}
               onChange={date => setStartDate(date as Date)}
             />
-            {renderCategory(handleChange)}
+            {userProjects.length ? (
+              renderProjects(userProjects, handleChange)
+            ) : (
+              <></>
+            )}
             {renderDescription(handleChange)}
           </div>
           {renderSubmitButton()}
@@ -152,24 +167,25 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
   </div>
 )
 
-const renderCategory = (handleChange: (event: ChangeEvent) => void) => (
+const renderProjects = (
+  userProjects: UserProjects,
+  handleChange: (event: ChangeEvent) => void,
+) => (
   <div className='col-span-2 sm:col-span-1'>
     <label
       htmlFor='category'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
     >
-      Category
+      Project
     </label>
     <select
       onSelect={e => handleChange(e as unknown as ChangeEvent)}
       id='category'
       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
     >
-      <option selected={true}>Select category</option>
-      <option value='TV'>TV/Monitors</option>
-      <option value='PC'>PC</option>
-      <option value='GA'>Gaming/Console</option>
-      <option value='PH'>Phones</option>
+      {userProjects.map(project => (
+        <option value={project}>{project}</option>
+      ))}
     </select>
   </div>
 )
