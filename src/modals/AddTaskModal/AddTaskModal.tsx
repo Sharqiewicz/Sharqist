@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { useReducer, useState } from 'react'
+import { FormEvent, FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -27,6 +27,11 @@ export const AddTaskModal: React.FC<{
     })
   }
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log(formData)
+  }
+
   return isOpen ? (
     createPortal(
       renderTaskModal({
@@ -35,6 +40,7 @@ export const AddTaskModal: React.FC<{
         startDate,
         setStartDate,
         handleChange,
+        onSubmit,
       }),
       document.getElementById('root') || document.body,
     )
@@ -49,6 +55,7 @@ interface RenderTaskModalProps {
   startDate: Date
   setStartDate: React.Dispatch<React.SetStateAction<Date>>
   handleChange: (event: ChangeEvent) => void
+  onSubmit: FormEventHandler<HTMLFormElement>
 }
 
 const renderTaskModal = ({
@@ -57,6 +64,7 @@ const renderTaskModal = ({
   startDate,
   setStartDate,
   handleChange,
+  onSubmit,
 }: RenderTaskModalProps) => (
   <section
     id='crud-modal'
@@ -67,7 +75,7 @@ const renderTaskModal = ({
     <div className='relative w-full max-w-md max-h-full p-4'>
       <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
         {renderHeader({ closeModal })}
-        <form className='p-4 md:p-5'>
+        <form className='p-4 md:p-5' onSubmit={onSubmit}>
           <div className='grid grid-cols-2 gap-4 mb-4'>
             {renderTaskName(handleChange)}
             <DatePicker
