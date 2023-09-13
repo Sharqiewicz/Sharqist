@@ -168,7 +168,7 @@ const renderDatePicker = (
   startDate: Date,
   setStartDate: React.Dispatch<React.SetStateAction<Date>>,
 ) => (
-  <div className='col-span-2'>
+  <div className='col-span-2 mt-5'>
     <label
       htmlFor='date'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
@@ -190,7 +190,7 @@ const renderProjects = (
   userProjects: UserProjects,
   handleChange: (event: ChangeEvent) => void,
 ) => (
-  <div className='col-span-2 sm:col-span-1'>
+  <div className='col-span-2 mt-5'>
     <label
       htmlFor='category'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
@@ -210,7 +210,7 @@ const renderProjects = (
 )
 
 const renderDescription = (handleChange: (event: ChangeEvent) => void) => (
-  <div className='col-span-2'>
+  <div className='col-span-2 mt-5'>
     <label
       htmlFor='description'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
@@ -230,7 +230,7 @@ const renderDescription = (handleChange: (event: ChangeEvent) => void) => (
 const renderSubmitButton = () => (
   <button
     type='submit'
-    className='text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+    className='flex items-center justify-center w-full mt-5 button-first'
   >
     <svg
       className='w-5 h-5 me-1 -ms-1'
