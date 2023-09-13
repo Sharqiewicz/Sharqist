@@ -45,6 +45,7 @@ export const AddTaskModal: React.FC<{
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(formData)
+    console.log(startDate)
   }
 
   const userProjects = getUserProjects()
@@ -96,19 +97,15 @@ const renderTaskModal = ({
       <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
         {renderHeader({ closeModal })}
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
-          <div className='grid grid-cols-2 gap-4 mb-4'>
-            {renderTaskName(handleChange)}
-            <DatePicker
-              selected={startDate}
-              onChange={date => setStartDate(date as Date)}
-            />
-            {userProjects.length ? (
-              renderProjects(userProjects, handleChange)
-            ) : (
-              <></>
-            )}
-            {renderDescription(handleChange)}
-          </div>
+          {renderTaskName(handleChange)}
+          {renderDatePicker(startDate, setStartDate)}
+          {userProjects.length ? (
+            renderProjects(userProjects, handleChange)
+          ) : (
+            <></>
+          )}
+          {renderDescription(handleChange)}
+
           {renderSubmitButton()}
         </form>
       </div>
@@ -163,6 +160,28 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
       placeholder='Type product name'
       required={true}
       onChange={handleChange}
+    />
+  </div>
+)
+
+const renderDatePicker = (
+  startDate: Date,
+  setStartDate: React.Dispatch<React.SetStateAction<Date>>,
+) => (
+  <div className='col-span-2'>
+    <label
+      htmlFor='date'
+      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+    >
+      Date
+    </label>
+    <DatePicker
+      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+      selected={startDate}
+      onChange={date => setStartDate(date as Date)}
+      dateFormat={'dd.MM.yyyy'}
+      required={true}
+      id='date'
     />
   </div>
 )
