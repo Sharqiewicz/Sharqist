@@ -98,12 +98,14 @@ const renderTaskModal = ({
         {renderHeader({ closeModal })}
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
           {renderTaskName(handleChange)}
-          {renderDatePicker(startDate, setStartDate)}
-          {userProjects.length ? (
-            renderProjects(userProjects, handleChange)
-          ) : (
-            <></>
-          )}
+          <div className='flex items-center justify-between'>
+            {renderDatePicker(startDate, setStartDate)}
+            {userProjects.length ? (
+              renderProjects(userProjects, handleChange)
+            ) : (
+              <></>
+            )}
+          </div>
           {renderDescription(handleChange)}
 
           {renderSubmitButton()}
@@ -176,7 +178,7 @@ const renderDatePicker = (
       Date
     </label>
     <DatePicker
-      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+      className='w-44 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
       selected={startDate}
       onChange={date => setStartDate(date as Date)}
       dateFormat={'dd.MM.yyyy'}
@@ -200,7 +202,7 @@ const renderProjects = (
     <select
       onSelect={e => handleChange(e as unknown as ChangeEvent)}
       id='category'
-      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+      className='w-44 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
     >
       {userProjects.map(project => (
         <option value={project}>{project}</option>
