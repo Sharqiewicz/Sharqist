@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom'
 import { FormEvent, FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { invoke } from '@tauri-apps/api'
 
 type UserProjects = string[]
 
@@ -35,7 +36,7 @@ export const AddTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
-  const [startDate, setStartDate] = useState(new Date())
+  const [date, setDate] = useState(new Date())
 
   const [formData, setFormData] = useReducer(formReducer, {})
 
@@ -46,10 +47,12 @@ export const AddTaskModal: React.FC<{
     })
   }
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(formData)
-    console.log(startDate)
+  const onSubmit = async () => {
+    await invoke('add_task', {
+      name: formData.name,
+      description: formData.description,
+      date,
+    })
   }
 
   const userProjects = getUserProjects()
@@ -59,8 +62,8 @@ export const AddTaskModal: React.FC<{
       renderTaskModal({
         isOpen,
         closeModal,
-        startDate,
-        setStartDate,
+        date,
+        setDate,
         handleChange,
         onSubmit,
         userProjects,
@@ -75,8 +78,8 @@ export const AddTaskModal: React.FC<{
 interface RenderTaskModalProps {
   isOpen: boolean
   closeModal: () => void
-  startDate: Date
-  setStartDate: React.Dispatch<React.SetStateAction<Date>>
+  date: Date
+  setDate: React.Dispatch<React.SetStateAction<Date>>
   handleChange: (event: ChangeEvent) => void
   onSubmit: FormEventHandler<HTMLFormElement>
   userProjects: string[]
@@ -85,8 +88,8 @@ interface RenderTaskModalProps {
 const renderTaskModal = ({
   isOpen,
   closeModal,
-  startDate,
-  setStartDate,
+  date,
+  setDate,
   handleChange,
   onSubmit,
   userProjects,
@@ -103,7 +106,7 @@ const renderTaskModal = ({
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
           {renderTaskName(handleChange)}
           <div className='flex items-center justify-between'>
-            {renderDatePicker(startDate, setStartDate)}
+            {renderDatePicker(date, setDate)}
             {userProjects.length ? (
               renderProjects(userProjects, handleChange)
             ) : (
@@ -224,6 +227,7 @@ const renderDescription = (handleChange: (event: ChangeEvent) => void) => (
       Description
     </label>
     <textarea
+      name='description'
       onChange={e => handleChange(e as unknown as ChangeEvent)}
       id='description'
       rows={4}
