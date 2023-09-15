@@ -2,6 +2,7 @@ import moment from 'moment'
 import { ITask } from '../../interfaces/ITask'
 import { Dropdown, DropdownOption } from '../Dropdown/Dropdown'
 import { PenIcon, TrashIcon } from '../../assets/icons'
+import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 
 export const Task = (task: ITask) => {
   const { name, description, date } = task
@@ -40,7 +41,12 @@ export const Task = (task: ITask) => {
       <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
         {description}
       </p>
-      <p className={dateClassName}>{moment(date).format('LL')}</p>
+      <div className='flex'>
+        <div className='box-border mr-2'>
+          <CalendarIcon />
+        </div>
+        <p className={dateClassName}>{moment(date).format('LL')}</p>
+      </div>
     </div>
   )
 }
