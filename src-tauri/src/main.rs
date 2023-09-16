@@ -2,8 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 #[tauri::command]
-fn delete_task(name: String, description: String, date: String) -> String {
-    add_task_to_db(name, description, date)
+fn delete_task(id: String) -> String {
+    delete_task_from_db(id)
 }
 
 #[tauri::command]
@@ -76,6 +76,15 @@ fn add_task_to_db(name: String, description: String, date: String) -> String {
     ) {
         Ok(_) => "Task added".to_string(),
         Err(_) => "Task addition failed.".to_string(),
+    }
+}
+
+fn delete_task_from_db(id: String) -> String {
+    let connection: Connection = open_database_connection();
+
+    match connection.execute("DELETE FROM tasks WHERE id = ?1", &[&id]) {
+        Ok(_) => "Task deleted".to_string(),
+        Err(_) => "Task deletion failed.".to_string(),
     }
 }
 
