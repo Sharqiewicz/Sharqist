@@ -2,6 +2,11 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 #[tauri::command]
+fn delete_task(name: String, description: String, date: String) -> String {
+    add_task_to_db(name, description, date)
+}
+
+#[tauri::command]
 fn add_task(name: String, description: String, date: String) -> String {
     add_task_to_db(name, description, date)
 }
@@ -12,6 +17,7 @@ fn open_database_connection() -> Connection {
 
 #[derive(serde::Serialize)]
 struct Task {
+    id: i32,
     name: String,
     description: String,
     date: String,
@@ -34,6 +40,7 @@ fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
     let tasks_iter = tasks
         .query_map([], |row| {
             Ok(Task {
+                id: row.get(0)?,
                 name: row.get(1)?,
                 description: row.get(2)?,
                 date: row.get(3)?,
@@ -47,8 +54,15 @@ fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
     }
 }
 
+#[derive(serde::Serialize)]
+struct NewTask {
+    name: String,
+    description: String,
+    date: String,
+}
+
 fn add_task_to_db(name: String, description: String, date: String) -> String {
-    let new_task: Task = Task {
+    let new_task: NewTask = NewTask {
         name: name,
         description: description,
         date: date,
@@ -100,7 +114,11 @@ fn main() -> Result<()> {
     }
 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![add_task, get_all_tasks])
+        .invoke_handler(tauri::generate_handler![
+            add_task,
+            get_all_tasks,
+            delete_task
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
