@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { FormEvent, FormEventHandler, useReducer, useState } from 'react'
+import { FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { invoke } from '@tauri-apps/api'
@@ -177,7 +177,7 @@ const renderDatePicker = (
   startDate: Date,
   setStartDate: React.Dispatch<React.SetStateAction<Date>>,
 ) => (
-  <div className='col-span-2 mt-5'>
+  <div className='mt-5 w-44'>
     <label
       htmlFor='date'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
@@ -185,7 +185,7 @@ const renderDatePicker = (
       Date
     </label>
     <DatePicker
-      className='w-44 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
       selected={startDate}
       onChange={date => setStartDate(date as Date)}
       dateFormat={'dd.MM.yyyy'}
@@ -199,7 +199,7 @@ const renderProjects = (
   userProjects: UserProjects,
   handleChange: (event: ChangeEvent) => void,
 ) => (
-  <div className='col-span-2 mt-5'>
+  <div className='mt-5 w-44'>
     <label
       htmlFor='category'
       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
