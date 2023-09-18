@@ -99,6 +99,7 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
             dark:hover:bg-gray-600
             dark:hover:text-white
         `}
+          onClick={option.onClick}
         >
           {option.icon()}
           <p

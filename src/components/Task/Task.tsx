@@ -3,9 +3,10 @@ import { ITask } from '../../interfaces/ITask'
 import { Dropdown, DropdownOption } from '../Dropdown/Dropdown'
 import { PenIcon, TrashIcon } from '../../assets/icons'
 import { CalendarIcon } from '../../assets/icons/CalendarIcon'
+import { invoke } from '@tauri-apps/api'
 
 export const Task = (task: ITask) => {
-  const { name, description, date } = task
+  const { name, description, date, id } = task
 
   const isBeforeToday = moment(date).add(1, 'days').isBefore(moment())
 
@@ -14,7 +15,10 @@ export const Task = (task: ITask) => {
   }`
 
   const editTask = () => {}
-  const deleteTask = () => {}
+  const deleteTask = async () => {
+    await invoke('delete_task', { id })
+    window.location.reload()
+  }
 
   const dropdownOptions: DropdownOption[] = [
     {
