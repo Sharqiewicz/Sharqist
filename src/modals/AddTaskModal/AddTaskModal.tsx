@@ -98,10 +98,11 @@ const renderTaskModal = ({
     id='crud-modal'
     tabIndex={-1}
     aria-hidden={!isOpen}
-    className='overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full'
+    className='fixed top-0 bottom-0 left-0 right-0 z-50 items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto md:inset-0 '
   >
+    <div className='fixed top-0 bottom-0 left-0 right-0 bg-black opacity-80'></div>
     <div className='relative w-full max-w-md max-h-full p-4'>
-      <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
+      <div className='fixed bg-gray-900 rounded-lg shadow z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
         {renderHeader({ closeModal })}
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
           {renderTaskName(handleChange)}
