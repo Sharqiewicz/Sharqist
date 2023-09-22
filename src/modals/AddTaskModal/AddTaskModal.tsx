@@ -50,7 +50,7 @@ export const AddTaskModal: React.FC<{
   const onSubmit = async () => {
     await invoke('add_task', {
       name: formData.name,
-      description: formData.description,
+      description: formData.description || '',
       date,
     })
   }
