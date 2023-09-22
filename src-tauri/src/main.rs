@@ -17,14 +17,15 @@ fn main() -> Result<()> {
     let connection: Connection = open_database_connection();
 
     if !does_table_exist(&connection, "tasks")? {
+        let create_task_table = "CREATE TABLE tasks (
+            id    INTEGER PRIMARY KEY,
+            name  TEXT NOT NULL,
+            description  TEXT,
+            date  TEXT,
+            is_done  BOOLEAN NOT NULL DEFAULT FALSE
+        )";
         connection.execute(
-            "CREATE TABLE tasks (
-                id    INTEGER PRIMARY KEY,
-                name  TEXT NOT NULL,
-                description  TEXT,
-                date  TEXT,
-                is_done  BOOLEAN NOT NULL DEFAULT FALSE
-            )",
+            create_task_table,
             (), // empty list of parameters.
         )?;
     }
