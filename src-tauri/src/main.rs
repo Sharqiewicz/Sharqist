@@ -22,7 +22,8 @@ fn main() -> Result<()> {
                 id    INTEGER PRIMARY KEY,
                 name  TEXT NOT NULL,
                 description  TEXT,
-                date  TEXT
+                date  TEXT,
+                is_done  BOOLEAN NOT NULL DEFAULT FALSE
             )",
             (), // empty list of parameters.
         )?;

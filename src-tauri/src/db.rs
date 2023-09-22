@@ -10,7 +10,7 @@ pub fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
     let connection: Connection = open_database_connection();
 
     let mut tasks: rusqlite::Statement<'_> = connection
-        .prepare("SELECT id, name, description, date FROM tasks")
+        .prepare("SELECT id, name, description, date, is_done FROM tasks")
         .expect("Failed to prepare query");
 
     let tasks_iter = tasks
@@ -20,6 +20,7 @@ pub fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
                 name: row.get(1)?,
                 description: row.get(2)?,
                 date: row.get(3)?,
+                is_done: row.get(4)?,
             })
         })
         .expect("Failed to prepare query");
@@ -35,13 +36,19 @@ pub fn add_task_to_db(name: String, description: String, date: String) -> String
         name: name,
         description: description,
         date: date,
+        is_done: false,
     };
 
     let connection: Connection = open_database_connection();
 
     match connection.execute(
-        "INSERT INTO tasks (name, description, date) VALUES (?1, ?2, ?3)",
-        (&new_task.name, &new_task.description, &new_task.date),
+        "INSERT INTO tasks (name, description, date, is_done) VALUES (?1, ?2, ?3, ?4)",
+        (
+            &new_task.name,
+            &new_task.description,
+            &new_task.date,
+            &new_task.is_done,
+        ),
     ) {
         Ok(_) => "Task added".to_string(),
         Err(_) => "Task addition failed.".to_string(),
