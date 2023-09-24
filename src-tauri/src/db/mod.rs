@@ -6,12 +6,39 @@ pub fn open_database_connection() -> Connection {
     return Connection::open("sharqist.db").expect("Failed to open connection to the database");
 }
 
-pub fn get_all_tasks_from_db() -> Result<Vec<Task>, String> {
+pub enum TaskVariants {
+    Inbox,
+    Today,
+    History,
+    Future,
+}
+
+pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String> {
     let connection: Connection = open_database_connection();
 
-    let mut tasks: rusqlite::Statement<'_> = connection
-        .prepare("SELECT id, name, description, date, is_done FROM tasks")
-        .expect("Failed to prepare query");
+    let mut tasks: rusqlite::Statement<'_> = match variant {
+        TaskVariants::Inbox => connection
+            .prepare("SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 0 AND date > date('now')")
+            .expect("Failed to prepare query"),
+        TaskVariants::Today => connection
+            .prepare(
+                "SELECT id, name, description, date, is_done FROM tasks WHERE date <= date('now')",
+            )
+            .expect("Failed to prepare query"),
+        TaskVariants::History => connection
+            .prepare(
+                "SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 1",
+            )
+            .expect("Failed to prepare query"),
+        TaskVariants::Future => connection
+            .prepare(
+                "SELECT id, name, description, date, is_done FROM tasks WHERE date > date('now') AND is_done = 0",
+            )
+            .expect("Failed to prepare query"),
+        _ => connection
+            .prepare("SELECT id, name, description, date, is_done FROM tasks")
+            .expect("Failed to prepare query"),
+    };
 
     let tasks_iter = tasks
         .query_map([], |row| {
@@ -80,5 +107,14 @@ pub fn does_table_exist(connection: &Connection, table_name: &str) -> Result<boo
     match result {
         Ok(_) => Ok(true),   // Table exists
         Err(_) => Ok(false), // Table doesn't exist or an error occurred
+    }
+}
+
+pub fn set_task_done_db(id: i32) -> String {
+    let connection: Connection = open_database_connection();
+
+    match connection.execute("UPDATE tasks SET is_done = 1 WHERE id = ?1", &[&id]) {
+        Ok(_) => "Task marked as done".to_string(),
+        Err(_) => "Task marking as done failed.".to_string(),
     }
 }

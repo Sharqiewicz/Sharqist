@@ -11,7 +11,10 @@ use db::{does_table_exist, open_database_connection};
 
 mod endpoints;
 
-use endpoints::{add_task, delete_task, get_all_tasks};
+use endpoints::{
+    add_task, delete_task, get_all_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks,
+    set_task_done,
+};
 
 fn main() -> Result<()> {
     let connection: Connection = open_database_connection();
@@ -34,7 +37,11 @@ fn main() -> Result<()> {
         .invoke_handler(tauri::generate_handler![
             add_task,
             get_all_tasks,
-            delete_task
+            delete_task,
+            set_task_done,
+            get_inbox_tasks,
+            get_today_tasks,
+            get_history_tasks
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
