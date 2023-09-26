@@ -9,21 +9,25 @@ import {
 
 import './index.css'
 
-import { PATHS } from './router/paths'
 import InboxPage from './pages/InboxPage/InboxPage'
+import TodayPage from './pages/TodayPage/TodayPage'
 
 import { ModalsProvider } from './modals/ModalsContext'
 import { ModalsManager } from './modals/ModalsManager'
+
 import { SidebarProvider } from './hooks'
+
+import { PATHS } from './router/paths'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path={PATHS.DEFAULT} element={<InboxPage />}>
-      <Route path={PATHS.DASHBOARD} element={<InboxPage />} />
+    <>
+      <Route path={PATHS.TODAY} element={<TodayPage />} />
       <Route path={PATHS.INBOX} element={<InboxPage />} />
-      <Route path={PATHS.TODAY} element={<InboxPage />} />
-      <Route path={PATHS.ADD_TASK} element={<InboxPage />} />
-    </Route>,
+      <Route path={PATHS.DASHBOARD} element={<TodayPage />} />
+      <Route path={PATHS.ADD_TASK} element={<TodayPage />} />
+      <Route path={PATHS.DEFAULT} element={<TodayPage />} />
+    </>,
   ),
 )
 
