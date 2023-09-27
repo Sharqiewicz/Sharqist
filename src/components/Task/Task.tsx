@@ -23,10 +23,10 @@ export const Task = (task: ITask) => {
   }
 
   const setIsDone = async () => {
-    // await invoke('set_task_done', { id })
+    await invoke('set_task_done', { id })
     const audio = new Audio(clickSound)
     audio.play()
-    // window.location.reload()
+    window.location.reload()
   }
 
   const dropdownOptions: DropdownOption[] = [
