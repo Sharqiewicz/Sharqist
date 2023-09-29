@@ -30,9 +30,6 @@ function InboxView() {
     }
   }
 
-  console.log('tasks')
-  console.log(tasks)
-
   return (
     <>
       <h1 className='mb-3 text-2xl font-bold text-gray-700'>Inbox</h1>
