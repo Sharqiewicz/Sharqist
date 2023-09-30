@@ -1,6 +1,6 @@
 export enum PATHS {
   DASHBOARD = 'dashboard',
-  DEFAULT = '',
+  DEFAULT = '/',
   INBOX = 'inbox',
   TODAY = 'today',
   ADD_TASK = 'add-task',
