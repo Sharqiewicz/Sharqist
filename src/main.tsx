@@ -9,8 +9,7 @@ import {
 
 import './index.css'
 
-import InboxPage from './pages/InboxPage/InboxPage'
-import TodayPage from './pages/TodayPage/TodayPage'
+import { InboxPage, TodayPage } from './pages'
 
 import { ModalsProvider } from './modals/ModalsContext'
 import { ModalsManager } from './modals/ModalsManager'
@@ -26,7 +25,7 @@ const router = createBrowserRouter(
       <Route path={PATHS.INBOX} element={<InboxPage />} />
       <Route path={PATHS.DASHBOARD} element={<TodayPage />} />
       <Route path={PATHS.ADD_TASK} element={<TodayPage />} />
-      <Route path={PATHS.DEFAULT} element={<TodayPage />} />
+      <Route path={PATHS.DEFAULT} element={<InboxPage />} />
     </>,
   ),
 )

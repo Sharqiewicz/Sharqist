@@ -1,10 +1,12 @@
 import { MainTemplate } from '../../templates/MainTemplate'
 import { TodayView } from '../../views/TodayView/TodayView'
 
-export default function TodayPage() {
+function TodayPage() {
   return (
     <MainTemplate>
       <TodayView />
     </MainTemplate>
   )
 }
+
+export { TodayPage }
