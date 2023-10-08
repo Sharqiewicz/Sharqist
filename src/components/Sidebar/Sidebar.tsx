@@ -1,8 +1,16 @@
 import { ReactElement, useMemo } from 'react'
+
 import { PathKeys, PATHS } from '../../router/paths'
-import { InboxIcon, AddTaskIcon, TodayIcon } from '../../assets/icons'
+import {
+  InboxIcon,
+  AddTaskIcon,
+  TodayIcon,
+  ClockIcon,
+} from '../../assets/icons'
 import { useSidebar } from '../../hooks'
-interface Subpage {
+
+import { SidebarListItem } from './SidebarListItem'
+export interface Subpage {
   path: PathKeys
   name: string
   icon: ReactElement
@@ -26,21 +34,18 @@ const ADD_TASK: Subpage = {
   icon: <AddTaskIcon />,
 }
 
+const HISTORY: Subpage = {
+  path: PATHS.HISTORY,
+  name: 'History',
+  icon: <ClockIcon />,
+}
+
 function Sidebar() {
-  const SUBPAGES: Subpage[] = [ADD_TASK, TODAY, INBOX]
+  const SUBPAGES: Subpage[] = [ADD_TASK, INBOX, TODAY, HISTORY]
 
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (
-      <li key={subpage.name}>
-        <a
-          href={subpage.path}
-          className='flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'
-        >
-          {subpage.icon}
-          <div className='m-1'></div>
-          {subpage.name}
-        </a>
-      </li>
+      <SidebarListItem key={subpage.name} subpage={subpage} />
     ))
 
     return renderedSubpages
