@@ -3,4 +3,5 @@ export interface ITask {
   name: string
   description: string
   date: string
+  is_done: boolean
 }
