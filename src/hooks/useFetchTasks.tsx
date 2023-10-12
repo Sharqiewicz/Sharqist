@@ -24,4 +24,4 @@ const useFetchTasks = (taskType: string) => {
   return tasks
 }
 
-export default useFetchTasks
+export { useFetchTasks }

@@ -1,7 +1,7 @@
 import { ITask } from '../../interfaces/ITask'
 import { useModal } from '../../modals/ModalsContext'
 import { TasksList } from '../../components/TaskList/TaskList'
-import useFetchTasks from '../../hooks/useFetchTasks'
+import { useFetchTasks } from '../../hooks/useFetchTasks'
 
 function InboxView() {
   const { MODALS, openModal } = useModal()
