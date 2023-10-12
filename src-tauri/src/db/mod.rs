@@ -118,3 +118,12 @@ pub fn set_task_done_db(id: i32) -> String {
         Err(_) => "Task marking as done failed.".to_string(),
     }
 }
+
+pub fn set_task_undone_db(id: i32) -> String {
+    let connection: Connection = open_database_connection();
+
+    match connection.execute("UPDATE tasks SET is_done = 0 WHERE id = ?1", &[&id]) {
+        Ok(_) => "Task marked as undone".to_string(),
+        Err(_) => "Task marking as undone failed.".to_string(),
+    }
+}

@@ -13,7 +13,7 @@ mod endpoints;
 
 use endpoints::{
     add_task, delete_task, get_all_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks,
-    set_task_done,
+    set_task_done, set_task_undone,
 };
 
 fn main() -> Result<()> {
@@ -41,7 +41,8 @@ fn main() -> Result<()> {
             set_task_done,
             get_inbox_tasks,
             get_today_tasks,
-            get_history_tasks
+            get_history_tasks,
+            set_task_undone
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

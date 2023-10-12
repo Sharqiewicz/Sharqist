@@ -1,6 +1,7 @@
 use crate::{
     db::{
-        add_task_to_db, delete_task_from_db, get_all_tasks_from_db, set_task_done_db, TaskVariants,
+        add_task_to_db, delete_task_from_db, get_all_tasks_from_db, set_task_done_db,
+        set_task_undone_db, TaskVariants,
     },
     structs::Task,
 };
@@ -32,10 +33,15 @@ pub fn get_today_tasks() -> Result<Vec<Task>, String> {
 
 #[tauri::command]
 pub fn get_history_tasks() -> Result<Vec<Task>, String> {
-    get_all_tasks_from_db(TaskVariants::Today)
+    get_all_tasks_from_db(TaskVariants::History)
 }
 
 #[tauri::command]
 pub fn set_task_done(id: i32) -> String {
     set_task_done_db(id)
+}
+
+#[tauri::command]
+pub fn set_task_undone(id: i32) -> String {
+    set_task_undone_db(id)
 }
