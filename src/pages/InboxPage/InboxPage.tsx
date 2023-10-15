@@ -1,5 +1,5 @@
 import { MainTemplate } from '../../templates/MainTemplate'
-import { InboxView } from '../../views/InboxView/InboxView'
+import { InboxView } from '../../views'
 
 function InboxPage() {
   return (

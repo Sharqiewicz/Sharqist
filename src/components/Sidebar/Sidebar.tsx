@@ -40,8 +40,14 @@ const HISTORY: Subpage = {
   icon: <ClockIcon />,
 }
 
+const UPCOMING: Subpage = {
+  path: PATHS.UPCOMING,
+  name: 'Upcoming',
+  icon: <ClockIcon />,
+}
+
 function Sidebar() {
-  const SUBPAGES: Subpage[] = [ADD_TASK, INBOX, TODAY, HISTORY]
+  const SUBPAGES: Subpage[] = [ADD_TASK, INBOX, TODAY, HISTORY, UPCOMING]
 
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (

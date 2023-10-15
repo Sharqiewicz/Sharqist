@@ -1,5 +1,5 @@
 import { MainTemplate } from '../../templates/MainTemplate'
-import { TodayView } from '../../views/TodayView/TodayView'
+import { TodayView } from '../../views'
 
 function TodayPage() {
   return (
