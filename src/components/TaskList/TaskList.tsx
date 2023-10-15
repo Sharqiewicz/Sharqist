@@ -3,19 +3,20 @@ import { Task } from '../../components/Task/Task'
 
 interface TasksListProps {
   tasks: ITask[]
+  forceTasksFetchUpdate: () => void
 }
 
-function TasksList({ tasks }: TasksListProps) {
+function TasksList({ tasks, forceTasksFetchUpdate }: TasksListProps) {
   if (tasks.length) {
     return (
       <>
         {tasks.map(task => (
-          <Task {...task} />
+          <Task {...{ task, forceTasksFetchUpdate }} />
         ))}
       </>
     )
   } else {
-    return <p>Aucun taches pour aujourd'hui</p>
+    return <p>No tasks to be displayed</p>
   }
 }
 

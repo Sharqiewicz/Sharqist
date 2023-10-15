@@ -6,14 +6,18 @@ import { useFetchTasks } from '../../hooks/useFetchTasks'
 function TodayView() {
   const { MODALS, openModal } = useModal()
 
-  const tasks: ITask[] = useFetchTasks('get_today_tasks')
+  const {
+    tasks,
+    forceTasksFetchUpdate,
+  }: { tasks: ITask[]; forceTasksFetchUpdate: () => void } =
+    useFetchTasks('get_today_tasks')
 
   return (
     <>
       <h1 className='mb-3 text-2xl font-bold text-gray-700'>Today</h1>
       <div className='row'></div>
 
-      <TasksList tasks={tasks} />
+      <TasksList tasks={tasks} forceTasksFetchUpdate={forceTasksFetchUpdate} />
 
       <hr className='my-5' />
 

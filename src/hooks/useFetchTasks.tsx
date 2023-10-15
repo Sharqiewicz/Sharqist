@@ -6,6 +6,7 @@ import { ITask } from '../interfaces/ITask'
 
 const useFetchTasks = (taskType: string) => {
   const [tasks, setTasks] = useState<ITask[]>([])
+  const [,] = useState<ITask[]>([])
 
   const fetchTasks = async () => {
     const allTasks: ITask[] = await invoke(taskType)
@@ -19,9 +20,13 @@ const useFetchTasks = (taskType: string) => {
 
   useEffect(() => {
     fetchTasks()
-  }, [])
+  }, [tasks])
 
-  return tasks
+  const forceTasksFetchUpdate = () => {
+    setTasks([])
+  }
+
+  return { tasks, forceTasksFetchUpdate }
 }
 
 export { useFetchTasks }

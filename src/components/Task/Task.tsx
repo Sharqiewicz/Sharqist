@@ -7,7 +7,13 @@ import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 import { CheckIcon } from '../../assets/icons/CheckIcon'
 import clickSound from '../../assets/sounds/pop.mp3'
 
-export const Task = (task: ITask) => {
+export const Task = ({
+  task,
+  forceTasksFetchUpdate,
+}: {
+  task: ITask
+  forceTasksFetchUpdate: () => void
+}) => {
   const { name, description, date, id } = task
 
   const isBeforeToday = moment(date).add(1, 'days').isBefore(moment())
@@ -17,23 +23,26 @@ export const Task = (task: ITask) => {
   }`
 
   const editTask = () => {}
+
   const deleteTask = async () => {
     await invoke('delete_task', { id })
-    window.location.reload()
+    forceTasksFetchUpdate()
   }
 
   const setIsDone = async () => {
-    await invoke('set_task_done', { id })
     const audio = new Audio(clickSound)
     audio.play()
-    window.location.reload()
+
+    await invoke('set_task_done', { id })
+    forceTasksFetchUpdate()
   }
 
   const setUndone = async () => {
-    await invoke('set_task_undone', { id })
     const audio = new Audio(clickSound)
     audio.play()
-    window.location.reload()
+
+    await invoke('set_task_undone', { id })
+    forceTasksFetchUpdate()
   }
 
   const dropdownOptions: DropdownOption[] = [
