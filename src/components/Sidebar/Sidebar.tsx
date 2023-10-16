@@ -6,6 +6,7 @@ import {
   AddTaskIcon,
   TodayIcon,
   ClockIcon,
+  CalendarOutlineIcon,
 } from '../../assets/icons'
 import { useSidebar } from '../../hooks'
 
@@ -43,7 +44,7 @@ const HISTORY: Subpage = {
 const UPCOMING: Subpage = {
   path: PATHS.UPCOMING,
   name: 'Upcoming',
-  icon: <ClockIcon />,
+  icon: <CalendarOutlineIcon />,
 }
 
 function Sidebar() {
