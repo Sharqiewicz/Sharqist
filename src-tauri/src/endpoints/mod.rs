@@ -37,6 +37,11 @@ pub fn get_history_tasks() -> Result<Vec<Task>, String> {
 }
 
 #[tauri::command]
+pub fn get_future_tasks() -> Result<Vec<Task>, String> {
+    get_all_tasks_from_db(TaskVariants::Future)
+}
+
+#[tauri::command]
 pub fn set_task_done(id: i32) -> String {
     set_task_done_db(id)
 }

@@ -18,25 +18,25 @@ pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String>
 
     let mut tasks: rusqlite::Statement<'_> = match variant {
         TaskVariants::Inbox => connection
-            .prepare("SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 0 AND date > date('now')")
+            .prepare("SELECT id, name, description, date(date, 'start of day') as date, is_done FROM tasks WHERE is_done = 0 AND date > date('now') AND is_done = 0")
             .expect("Failed to prepare query"),
         TaskVariants::Today => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE date <= date('now')",
+                "SELECT id, name, description, date(date, 'start of day') as date, is_done, date('now') as current_date FROM tasks WHERE date <= date('now') AND is_done = 0",
             )
             .expect("Failed to prepare query"),
         TaskVariants::History => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 1",
+                "SELECT id, name, description, date(date, 'start of day') as date, is_done FROM tasks WHERE is_done = 1",
             )
             .expect("Failed to prepare query"),
         TaskVariants::Future => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE date > date('now') AND is_done = 0",
+                "SELECT id, name, description, date(date, 'start of day') as date, is_done FROM tasks WHERE date > date('now') AND is_done = 0",
             )
             .expect("Failed to prepare query"),
         _ => connection
-            .prepare("SELECT id, name, description, date, is_done FROM tasks")
+            .prepare("SELECT id, name, description, date(date, 'start of day') as date, is_done FROM tasks")
             .expect("Failed to prepare query"),
     };
 

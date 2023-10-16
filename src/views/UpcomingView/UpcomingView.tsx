@@ -11,7 +11,7 @@ function UpcomingView() {
 
   return (
     <>
-      <h1 className='mb-3 text-2xl font-bold text-gray-700'>Today</h1>
+      <h1 className='mb-3 text-2xl font-bold text-gray-700'>Upcoming</h1>
       <div className='row'></div>
 
       <TasksList tasks={tasks} forceTasksFetchUpdate={forceTasksFetchUpdate} />

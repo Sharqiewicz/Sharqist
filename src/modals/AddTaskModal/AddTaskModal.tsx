@@ -3,6 +3,7 @@ import { FormEventHandler, useReducer, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { invoke } from '@tauri-apps/api'
+import moment from 'moment'
 
 type UserProjects = string[]
 
@@ -36,8 +37,11 @@ export const AddTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(moment(new Date()).startOf('day').toDate())
 
+  const setNewDate = (date: Date) => {
+    setDate(moment(date).startOf('day').toDate())
+  }
   const [formData, setFormData] = useReducer(formReducer, {})
 
   const handleChange = (event: ChangeEvent) => {
@@ -63,7 +67,7 @@ export const AddTaskModal: React.FC<{
         isOpen,
         closeModal,
         date,
-        setDate,
+        setDate: setNewDate,
         handleChange,
         onSubmit,
         userProjects,
@@ -79,7 +83,7 @@ interface RenderTaskModalProps {
   isOpen: boolean
   closeModal: () => void
   date: Date
-  setDate: React.Dispatch<React.SetStateAction<Date>>
+  setDate: (date: Date) => void
   handleChange: (event: ChangeEvent) => void
   onSubmit: FormEventHandler<HTMLFormElement>
   userProjects: string[]
@@ -176,7 +180,7 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
 
 const renderDatePicker = (
   startDate: Date,
-  setStartDate: React.Dispatch<React.SetStateAction<Date>>,
+  setStartDate: (date: Date) => void,
 ) => (
   <div className='mt-5 w-44'>
     <label
@@ -188,7 +192,10 @@ const renderDatePicker = (
     <DatePicker
       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
       selected={startDate}
-      onChange={date => setStartDate(date as Date)}
+      onChange={date => {
+        console.log(date)
+        setStartDate(date as Date)
+      }}
       dateFormat={'dd.MM.yyyy'}
       required={true}
       id='date'
