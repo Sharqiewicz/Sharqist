@@ -12,8 +12,8 @@ use db::{does_table_exist, open_database_connection};
 mod endpoints;
 
 use endpoints::{
-    add_task, delete_task, get_all_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks,
-    set_task_done, set_task_undone,
+    add_task, delete_task, get_all_tasks, get_future_tasks, get_history_tasks, get_inbox_tasks,
+    get_today_tasks, set_task_done, set_task_undone,
 };
 
 fn main() -> Result<()> {
@@ -42,7 +42,8 @@ fn main() -> Result<()> {
             get_inbox_tasks,
             get_today_tasks,
             get_history_tasks,
-            set_task_undone
+            set_task_undone,
+            get_future_tasks
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

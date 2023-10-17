@@ -22,7 +22,7 @@ pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String>
             .expect("Failed to prepare query"),
         TaskVariants::Today => connection
             .prepare(
-                "SELECT id, name, description, date(date, 'start of day') as date, is_done, date('now') as current_date FROM tasks WHERE date <= date('now') AND is_done = 0",
+                "SELECT id, name, description, date(date, 'start of day') as date, is_done FROM tasks WHERE date(date, 'start of day') <= date('now', 'start of day') AND is_done = 0",
             )
             .expect("Failed to prepare query"),
         TaskVariants::History => connection
