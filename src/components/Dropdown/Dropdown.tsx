@@ -87,6 +87,7 @@ const renderDropdownOptions = (options: DropdownOption[]) => (
     >
       {options.map(option => (
         <li
+          key={option.name}
           className={`
             box-border
             px-5
