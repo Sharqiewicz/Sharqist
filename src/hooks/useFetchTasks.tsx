@@ -20,10 +20,10 @@ const useFetchTasks = (taskType: string) => {
 
   useEffect(() => {
     fetchTasks()
-  }, [tasks])
+  }, [])
 
-  const forceTasksFetchUpdate = () => {
-    setTasks([])
+  const forceTasksFetchUpdate = async () => {
+    await fetchTasks()
   }
 
   return { tasks, forceTasksFetchUpdate }
