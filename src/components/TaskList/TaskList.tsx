@@ -11,7 +11,7 @@ function TasksList({ tasks, forceTasksFetchUpdate }: TasksListProps) {
     return (
       <>
         {tasks.map(task => (
-          <Task {...{ task, forceTasksFetchUpdate }} />
+          <Task {...{ task, forceTasksFetchUpdate }} key={task.id} />
         ))}
       </>
     )
