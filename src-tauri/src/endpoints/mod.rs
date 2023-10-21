@@ -18,7 +18,7 @@ pub fn add_task(name: String, description: String, date: String) -> String {
 
 #[tauri::command]
 pub fn get_all_tasks() -> Result<Vec<Task>, String> {
-    get_all_tasks_from_db(TaskVariants::Future)
+    get_all_tasks_from_db(TaskVariants::All)
 }
 
 #[tauri::command]
