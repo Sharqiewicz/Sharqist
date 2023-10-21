@@ -6,6 +6,7 @@ import { PenIcon, TrashIcon } from '../../assets/icons'
 import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 import { CheckIcon } from '../../assets/icons/CheckIcon'
 import clickSound from '../../assets/sounds/pop.mp3'
+import trashSound from '../../assets/sounds/trash.mp3'
 
 export const Task = ({
   task,
@@ -25,6 +26,9 @@ export const Task = ({
   const editTask = () => {}
 
   const deleteTask = async () => {
+    const audio = new Audio(trashSound)
+    audio.play()
+
     await invoke('delete_task', { id })
     forceTasksFetchUpdate()
   }
