@@ -10,7 +10,7 @@ function InboxView() {
     tasks,
     forceTasksFetchUpdate,
   }: { tasks: ITask[]; forceTasksFetchUpdate: () => void } =
-    useFetchTasks('get_all_tasks')
+    useFetchTasks('get_inbox_tasks')
 
   return (
     <>
