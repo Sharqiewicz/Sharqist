@@ -53,11 +53,14 @@ export const AddTaskModal: React.FC<{
     })
   }
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: any) => {
+    // @todo preventDefault
+    e.preventDefault()
+    console.log(moment.utc(date).startOf('day').format('YYYY-MM-DD'))
     await invoke('add_task', {
       name: formData.name,
       description: formData.description || '',
-      date,
+      date: moment.utc(date).startOf('day').format('YYYY-MM-DD'),
     })
   }
 
