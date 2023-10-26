@@ -1,8 +1,10 @@
 import { ITask } from '../../interfaces/ITask'
 import { TasksList } from '../../components/TaskList/TaskList'
 import { useFetchTasks } from '../../hooks/useFetchTasks'
+import { useModal } from '../../modals/ModalsContext'
 
 function UpcomingView() {
+  const { MODALS, openModal } = useModal()
   const {
     tasks,
     forceTasksFetchUpdate,
@@ -15,6 +17,17 @@ function UpcomingView() {
       <div className='row'></div>
 
       <TasksList tasks={tasks} forceTasksFetchUpdate={forceTasksFetchUpdate} />
+      <hr className='my-5' />
+
+      <div className='flex justify-center w-full'>
+        <button
+          onClick={() => openModal(MODALS.ADD_TASK_MODAL)}
+          type='button'
+          className='button-first'
+        >
+          Add Task
+        </button>
+      </div>
     </>
   )
 }
