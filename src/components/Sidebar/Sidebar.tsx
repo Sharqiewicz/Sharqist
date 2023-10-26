@@ -29,12 +29,6 @@ const TODAY: Subpage = {
   icon: <TodayIcon />,
 }
 
-const ADD_TASK: Subpage = {
-  path: PATHS.ADD_TASK,
-  name: 'Add Task',
-  icon: <AddTaskIcon />,
-}
-
 const HISTORY: Subpage = {
   path: PATHS.HISTORY,
   name: 'History',
@@ -48,7 +42,7 @@ const UPCOMING: Subpage = {
 }
 
 function Sidebar() {
-  const SUBPAGES: Subpage[] = [ADD_TASK, INBOX, TODAY, HISTORY, UPCOMING]
+  const SUBPAGES: Subpage[] = [INBOX, TODAY, HISTORY, UPCOMING]
 
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (
