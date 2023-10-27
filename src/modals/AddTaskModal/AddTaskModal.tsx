@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom'
 import { FormEventHandler, useReducer, useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { invoke } from '@tauri-apps/api'
 import moment from 'moment'
+
+import { DatePicker } from '../../components/Form/DatePicker'
 
 type UserProjects = string[]
 
@@ -116,7 +116,7 @@ const renderTaskModal = ({
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
           {renderTaskName(handleChange)}
           <div className='flex items-center justify-between'>
-            {renderDatePicker(date, setDate)}
+            <DatePicker date={date} setDate={setDate} />
             {userProjects.length ? (
               renderProjects(userProjects, handleChange)
             ) : (
@@ -179,31 +179,6 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
       placeholder='Type product name'
       required={true}
       onChange={handleChange}
-    />
-  </div>
-)
-
-const renderDatePicker = (
-  startDate: Date,
-  setStartDate: (date: Date) => void,
-) => (
-  <div className='mt-5 w-44'>
-    <label
-      htmlFor='date'
-      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-    >
-      Date
-    </label>
-    <DatePicker
-      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
-      selected={startDate}
-      onChange={date => {
-        console.log(date)
-        setStartDate(date as Date)
-      }}
-      dateFormat={'dd.MM.yyyy'}
-      required={true}
-      id='date'
     />
   </div>
 )
