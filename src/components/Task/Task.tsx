@@ -7,6 +7,7 @@ import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 import { CheckIcon } from '../../assets/icons/CheckIcon'
 import clickSound from '../../assets/sounds/pop.mp3'
 import trashSound from '../../assets/sounds/trash.mp3'
+import { useModal } from '../../modals/ModalsContext'
 
 export const Task = ({
   task,
@@ -23,7 +24,11 @@ export const Task = ({
     isBeforeToday ? 'text-red-600' : 'text-gray-500 dark:text-gray-400'
   }`
 
-  const editTask = () => {}
+  const { openModal, MODALS } = useModal()
+
+  const editTask = () => {
+    openModal(MODALS.EDIT_TASK_MODAL, { task })
+  }
 
   const deleteTask = async () => {
     const audio = new Audio(trashSound)
