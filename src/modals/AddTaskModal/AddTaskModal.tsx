@@ -4,6 +4,7 @@ import { invoke } from '@tauri-apps/api'
 import moment from 'moment'
 
 import { DatePicker } from '../../components/Form/DatePicker'
+import { Description } from '../../components/Form/Description'
 
 type UserProjects = string[]
 
@@ -123,7 +124,7 @@ const renderTaskModal = ({
               <></>
             )}
           </div>
-          {renderDescription(handleChange)}
+          <Description handleChange={handleChange} />
 
           {renderSubmitButton()}
         </form>
@@ -203,25 +204,6 @@ const renderProjects = (
         <option value={project}>{project}</option>
       ))}
     </select>
-  </div>
-)
-
-const renderDescription = (handleChange: (event: ChangeEvent) => void) => (
-  <div className='col-span-2 mt-5'>
-    <label
-      htmlFor='description'
-      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-    >
-      Description
-    </label>
-    <textarea
-      name='description'
-      onChange={e => handleChange(e as unknown as ChangeEvent)}
-      id='description'
-      rows={4}
-      className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-      placeholder='Write product description here'
-    ></textarea>
   </div>
 )
 
