@@ -5,16 +5,7 @@ import moment from 'moment'
 
 import { DatePicker } from '../../components/Form/DatePicker'
 import { Description } from '../../components/Form/Description'
-
-type UserProjects = string[]
-
-function getUserProjects(): UserProjects {
-  return [
-    'Project 1 Project 1Project 1Project 1Project 1',
-    'Project 2',
-    'Project 3',
-  ]
-}
+import { ProjectsList } from '../../components/Form/ProjectsList'
 
 type FormState = {
   [key: string]: string | number | boolean
@@ -31,8 +22,6 @@ const formReducer = (state: FormState, event: FormAction) => {
     [event.name]: event.value,
   }
 }
-
-type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 export const AddTaskModal: React.FC<{
   isOpen: boolean
@@ -65,8 +54,6 @@ export const AddTaskModal: React.FC<{
     })
   }
 
-  const userProjects = getUserProjects()
-
   return isOpen ? (
     createPortal(
       renderTaskModal({
@@ -76,7 +63,6 @@ export const AddTaskModal: React.FC<{
         setDate: setNewDate,
         handleChange,
         onSubmit,
-        userProjects,
       }),
       document.getElementById('root') || document.body,
     )
@@ -84,7 +70,7 @@ export const AddTaskModal: React.FC<{
     <></>
   )
 }
-
+type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 interface RenderTaskModalProps {
   isOpen: boolean
   closeModal: () => void
@@ -92,7 +78,6 @@ interface RenderTaskModalProps {
   setDate: (date: Date) => void
   handleChange: (event: ChangeEvent) => void
   onSubmit: FormEventHandler<HTMLFormElement>
-  userProjects: string[]
 }
 
 const renderTaskModal = ({
@@ -102,7 +87,6 @@ const renderTaskModal = ({
   setDate,
   handleChange,
   onSubmit,
-  userProjects,
 }: RenderTaskModalProps) => (
   <section
     id='crud-modal'
@@ -118,11 +102,7 @@ const renderTaskModal = ({
           {renderTaskName(handleChange)}
           <div className='flex items-center justify-between'>
             <DatePicker date={date} setDate={setDate} />
-            {userProjects.length ? (
-              renderProjects(userProjects, handleChange)
-            ) : (
-              <></>
-            )}
+            <ProjectsList handleChange={handleChange} />
           </div>
           <Description handleChange={handleChange} />
 
@@ -181,29 +161,6 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
       required={true}
       onChange={handleChange}
     />
-  </div>
-)
-
-const renderProjects = (
-  userProjects: UserProjects,
-  handleChange: (event: ChangeEvent) => void,
-) => (
-  <div className='mt-5 ml-2 w-44'>
-    <label
-      htmlFor='category'
-      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-    >
-      Project
-    </label>
-    <select
-      onSelect={e => handleChange(e as unknown as ChangeEvent)}
-      id='category'
-      className='w-44 text-ellipsis overflow-hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
-    >
-      {userProjects.map(project => (
-        <option value={project}>{project}</option>
-      ))}
-    </select>
   </div>
 )
 
