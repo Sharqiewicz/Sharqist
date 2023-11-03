@@ -7,6 +7,7 @@ import { DatePicker } from '../../components/Form/DatePicker'
 import { Description } from '../../components/Form/Description'
 import { ProjectsList } from '../../components/Form/ProjectsList'
 import { ButtonPrimary } from '../../components/Button/ButtonPrimary'
+import { TextInput } from '../../components/Form/TextInput'
 
 type FormState = {
   [key: string]: string | number | boolean
@@ -116,7 +117,7 @@ const renderTaskModal = ({
       <div className='fixed w-2/5 bg-gray-900 rounded-lg shadow min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
         {renderHeader({ closeModal })}
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
-          {renderTaskName(handleChange)}
+          <TextInput handleChange={handleChange} />
           <div className='flex items-center justify-between'>
             <DatePicker date={date} setDate={setDate} />
             <ProjectsList handleChange={handleChange} />
@@ -158,25 +159,5 @@ const renderHeader = ({ closeModal }: { closeModal: () => void }) => (
       </svg>
       <span className='sr-only'>Close modal</span>
     </button>
-  </div>
-)
-
-const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
-  <div className='col-span-2'>
-    <label
-      htmlFor='name'
-      className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-    >
-      Task name
-    </label>
-    <input
-      type='text'
-      name='name'
-      id='name'
-      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
-      placeholder='Type product name'
-      required={true}
-      onChange={handleChange}
-    />
   </div>
 )
