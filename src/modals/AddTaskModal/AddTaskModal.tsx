@@ -6,6 +6,7 @@ import moment from 'moment'
 import { DatePicker } from '../../components/Form/DatePicker'
 import { Description } from '../../components/Form/Description'
 import { ProjectsList } from '../../components/Form/ProjectsList'
+import { ButtonPrimary } from '../../components/Button/ButtonPrimary'
 
 type FormState = {
   [key: string]: string | number | boolean
@@ -70,6 +71,22 @@ export const AddTaskModal: React.FC<{
     <></>
   )
 }
+
+const ButtonSVG = () => (
+  <svg
+    className='w-5 h-5 me-1 -ms-1'
+    fill='currentColor'
+    viewBox='0 0 20 20'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      fillRule='evenodd'
+      d='M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z'
+      clipRule='evenodd'
+    ></path>
+  </svg>
+)
+
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 interface RenderTaskModalProps {
   isOpen: boolean
@@ -106,7 +123,7 @@ const renderTaskModal = ({
           </div>
           <Description handleChange={handleChange} />
 
-          {renderSubmitButton()}
+          <ButtonPrimary {...{ text: 'Create Task', svg: <ButtonSVG /> }} />
         </form>
       </div>
     </div>
@@ -162,25 +179,4 @@ const renderTaskName = (handleChange: (event: ChangeEvent) => void) => (
       onChange={handleChange}
     />
   </div>
-)
-
-const renderSubmitButton = () => (
-  <button
-    type='submit'
-    className='flex items-center justify-center w-full mt-5 button-first'
-  >
-    <svg
-      className='w-5 h-5 me-1 -ms-1'
-      fill='currentColor'
-      viewBox='0 0 20 20'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        fillRule='evenodd'
-        d='M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z'
-        clipRule='evenodd'
-      ></path>
-    </svg>
-    Create Task
-  </button>
 )
