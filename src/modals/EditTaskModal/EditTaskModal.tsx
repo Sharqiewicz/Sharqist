@@ -3,18 +3,30 @@ import { FormEventHandler, useReducer, useState } from 'react'
 import { invoke } from '@tauri-apps/api'
 import moment from 'moment'
 
+import { DatePicker } from '../../components/Form/DatePicker'
+import { Description } from '../../components/Form/Description'
+import { ProjectsList } from '../../components/Form/ProjectsList'
+import { ButtonPrimary } from '../../components/Button/ButtonPrimary'
+import { TextInput } from '../../components/Form/TextInput'
 import { ModalHeader } from '../components/ModalHeader/ModalHeader'
-import { TaskForm } from '../../components/Form/TaskForm'
-import { INewTask } from '../../interfaces/ITask'
 
-type FormState = INewTask
+type FormState = {
+  [key: string]: string | number | boolean
+}
 
 type FormAction = {
   name: string
   value: string | number | boolean
 }
 
-export const AddTaskModal: React.FC<{
+const formReducer = (state: FormState, event: FormAction) => {
+  return {
+    ...state,
+    [event.name]: event.value,
+  }
+}
+
+export const EditTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
@@ -25,22 +37,7 @@ export const AddTaskModal: React.FC<{
   const setNewDate = (date: Date) => {
     setDate(moment.utc(date).startOf('day').toDate())
   }
-
-  const formReducer = (state: FormState, event: FormAction) => {
-    return {
-      ...state,
-      [event.name]: event.value,
-    }
-  }
-
-  const initalValue: INewTask = {
-    date: '',
-    description: '',
-    is_done: false,
-    name: '',
-  }
-
-  const [formData, setFormData] = useReducer(formReducer, initalValue)
+  const [formData, setFormData] = useReducer(formReducer, {})
 
   const handleChange = (event: ChangeEvent) => {
     setFormData({
@@ -52,10 +49,11 @@ export const AddTaskModal: React.FC<{
   const onSubmit = async (e: any) => {
     e.preventDefault()
 
-    await invoke('add_task', {
+    await invoke('edit_task', {
       name: formData.name,
       description: formData.description || '',
       date: moment.utc(date).startOf('day').format('YYYY-MM-DD'),
+      id,
     })
   }
 
@@ -68,7 +66,6 @@ export const AddTaskModal: React.FC<{
         setDate: setNewDate,
         handleChange,
         onSubmit,
-        formData,
       }),
       document.getElementById('root') || document.body,
     )
@@ -76,6 +73,21 @@ export const AddTaskModal: React.FC<{
     <></>
   )
 }
+
+const ButtonSVG = () => (
+  <svg
+    className='w-5 h-5 me-1 -ms-1'
+    fill='currentColor'
+    viewBox='0 0 20 20'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      fillRule='evenodd'
+      d='M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z'
+      clipRule='evenodd'
+    ></path>
+  </svg>
+)
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 interface RenderTaskModalProps {
@@ -85,7 +97,6 @@ interface RenderTaskModalProps {
   setDate: (date: Date) => void
   handleChange: (event: ChangeEvent) => void
   onSubmit: FormEventHandler<HTMLFormElement>
-  formData: INewTask
 }
 
 const renderTaskModal = ({
@@ -95,7 +106,6 @@ const renderTaskModal = ({
   setDate,
   handleChange,
   onSubmit,
-  formData,
 }: RenderTaskModalProps) => (
   <section
     id='crud-modal'
@@ -107,15 +117,20 @@ const renderTaskModal = ({
     <div className='relative w-full max-w-md max-h-full p-4'>
       <div className='fixed w-2/5 bg-gray-900 rounded-lg shadow min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
         <ModalHeader closeModal={closeModal} />
-        <TaskForm
-          initialValues={formData}
-          handleChange={
-            handleChange as (event: React.ChangeEvent<Element>) => void
-          }
-          handleSubmit={onSubmit}
-          date={date}
-          setDate={setDate}
-        />
+        <form className='p-4 md:p-5' onSubmit={onSubmit}>
+          <TextInput
+            handleChange={
+              handleChange as (event: React.ChangeEvent<Element>) => void
+            }
+          />
+          <div className='flex items-center justify-between'>
+            <DatePicker date={date} setDate={setDate} />
+            <ProjectsList handleChange={handleChange} />
+          </div>
+          <Description handleChange={handleChange} />
+
+          <ButtonPrimary {...{ text: 'Create Task', svg: <ButtonSVG /> }} />
+        </form>
       </div>
     </div>
   </section>
