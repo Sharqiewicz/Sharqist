@@ -8,6 +8,7 @@ import { Description } from '../../components/Form/Description'
 import { ProjectsList } from '../../components/Form/ProjectsList'
 import { ButtonPrimary } from '../../components/Button/ButtonPrimary'
 import { TextInput } from '../../components/Form/TextInput'
+import { ModalHeader } from '../components/ModalHeader/ModalHeader'
 
 type FormState = {
   [key: string]: string | number | boolean
@@ -46,9 +47,8 @@ export const AddTaskModal: React.FC<{
   }
 
   const onSubmit = async (e: any) => {
-    // @todo preventDefault
     e.preventDefault()
-    console.log(moment.utc(date).startOf('day').format('YYYY-MM-DD'))
+
     await invoke('add_task', {
       name: formData.name,
       description: formData.description || '',
@@ -115,9 +115,13 @@ const renderTaskModal = ({
     <div className='fixed top-0 bottom-0 left-0 right-0 bg-black opacity-80'></div>
     <div className='relative w-full max-w-md max-h-full p-4'>
       <div className='fixed w-2/5 bg-gray-900 rounded-lg shadow min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
-        {renderHeader({ closeModal })}
+        <ModalHeader closeModal={closeModal} />
         <form className='p-4 md:p-5' onSubmit={onSubmit}>
-          <TextInput handleChange={handleChange} />
+          <TextInput
+            handleChange={
+              handleChange as (event: React.ChangeEvent<Element>) => void
+            }
+          />
           <div className='flex items-center justify-between'>
             <DatePicker date={date} setDate={setDate} />
             <ProjectsList handleChange={handleChange} />
@@ -129,35 +133,4 @@ const renderTaskModal = ({
       </div>
     </div>
   </section>
-)
-
-const renderHeader = ({ closeModal }: { closeModal: () => void }) => (
-  <div className='flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600'>
-    <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-      Add Task
-    </h3>
-    <button
-      type='button'
-      className='inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white'
-      data-modal-toggle='crud-modal'
-      onClick={closeModal}
-    >
-      <svg
-        className='w-3 h-3'
-        aria-hidden='true'
-        xmlns='http://www.w3.org/2000/svg'
-        fill='none'
-        viewBox='0 0 14 14'
-      >
-        <path
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
-        />
-      </svg>
-      <span className='sr-only'>Close modal</span>
-    </button>
-  </div>
 )
