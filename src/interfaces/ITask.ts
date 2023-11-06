@@ -5,3 +5,5 @@ export interface ITask {
   date: string
   is_done: boolean
 }
+
+export type INewTask = Omit<ITask, 'id'>
