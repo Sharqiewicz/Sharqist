@@ -11,7 +11,7 @@ type TaskFormAction = {
   value: string | number | boolean
 }
 
-export const useTaskFormReducer = () => {
+export const useTaskFormReducer = (initialValue?: INewTask) => {
   const [taskDate, setTaskDate] = useState(
     moment.utc(new Date()).startOf('day').toDate(),
   )
@@ -27,17 +27,23 @@ export const useTaskFormReducer = () => {
     }
   }
 
-  const initalValue: INewTask = {
+  const baseInitalValue: INewTask = {
     date: '',
     description: '',
     is_done: false,
     name: '',
   }
 
-  const [taskFormData, setTaskFormData] = useReducer(
-    taskFormReducer,
-    initalValue,
-  )
+  const baseState = initialValue || baseInitalValue
+
+  const [taskFormData, setTaskFormData] = useReducer(taskFormReducer, baseState)
+
+  console.log('baseState')
+  console.log(baseState)
+  console.log('initialValue')
+  console.log(initialValue)
+  console.log('taskFormData')
+  console.log(taskFormData)
 
   const handleTaskFormChange = (event: ChangeEvent) => {
     setTaskFormData({

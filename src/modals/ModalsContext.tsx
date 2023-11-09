@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
+import { ITask } from '../interfaces/ITask'
 
 enum MODALS_ENUM {
   ADD_TASK_MODAL = 'AddTaskModal',
@@ -7,7 +8,7 @@ enum MODALS_ENUM {
 
 export type ModalsKeys = (typeof MODALS_ENUM)[keyof typeof MODALS_ENUM]
 
-export type ModalOptions = any
+export type ModalOptions = ITask | undefined
 interface ModalContextProps {
   modals: Record<string, boolean>
   openModal: (modalName: ModalsKeys, modalOptions?: ModalOptions) => void
@@ -30,6 +31,8 @@ const ModalsProvider: React.FC<ModalProviderProps> = ({ children }) => {
     setModals({
       [modalName]: true,
     })
+    console.log('setModalOptions')
+    console.log(modalOptions)
     setModalOptions(modalOptions)
   }
 

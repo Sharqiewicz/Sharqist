@@ -4,22 +4,31 @@ import moment from 'moment'
 
 import { TaskModal } from '../TaskModal/TaskModal'
 import { useTaskFormReducer } from '../TaskModal/useTaskFormReducer'
+import { useModal } from '../ModalsContext'
 
 export const EditTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
+  const { modalOptions } = useModal()
+
+  console.log('modalOptions')
+  console.log(modalOptions)
+
   const { handleTaskFormChange, setNewTaskDate, taskDate, taskFormData } =
-    useTaskFormReducer()
+    useTaskFormReducer(modalOptions)
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
 
-    await invoke('edit_task', {
-      name: taskFormData.name,
-      description: taskFormData.description || '',
-      date: moment.utc(taskDate).startOf('day').format('YYYY-MM-DD'),
-    })
+    if (modalOptions && modalOptions.id) {
+      await invoke('edit_task', {
+        name: taskFormData.name,
+        description: taskFormData.description || '',
+        date: moment.utc(taskDate).startOf('day').format('YYYY-MM-DD'),
+        id: modalOptions.id,
+      })
+    }
   }
 
   if (!isOpen) return null

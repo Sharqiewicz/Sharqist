@@ -27,7 +27,7 @@ export const Task = ({
   const { openModal, MODALS } = useModal()
 
   const editTask = () => {
-    openModal(MODALS.EDIT_TASK_MODAL, { task })
+    openModal(MODALS.EDIT_TASK_MODAL, task)
   }
 
   const deleteTask = async () => {
