@@ -13,8 +13,8 @@ const ModalsManager: React.FC = () => {
         isOpen={modals[MODALS.ADD_TASK_MODAL]}
       />
       <EditTaskModal
-        closeModal={() => closeModal(MODALS.ADD_TASK_MODAL)}
-        isOpen={modals[MODALS.ADD_TASK_MODAL]}
+        closeModal={() => closeModal(MODALS.EDIT_TASK_MODAL)}
+        isOpen={modals[MODALS.EDIT_TASK_MODAL]}
       />
     </>
   )

@@ -27,6 +27,7 @@ type TaskFormProps = {
   handleSubmit: FormEventHandler<HTMLFormElement>
   setDate: (date: Date) => void
   date: Date
+  buttonText: string
 }
 
 export const TaskForm: React.FC<TaskFormProps> = ({
@@ -35,6 +36,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({
   handleSubmit,
   date,
   setDate,
+  buttonText,
 }) => (
   <form className='p-4 md:p-5' onSubmit={handleSubmit}>
     <TextInput handleChange={handleChange} initialValue={initialValues.name} />
@@ -46,6 +48,6 @@ export const TaskForm: React.FC<TaskFormProps> = ({
       handleChange={handleChange}
       initialValue={initialValues.description}
     />
-    <ButtonPrimary {...{ text: 'Create Task', svg: <ButtonSVG /> }} />
+    <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
   </form>
 )

@@ -33,6 +33,10 @@ export const AddTaskModal: React.FC<{
       handleTaskFormChange={handleTaskFormChange}
       taskFormData={taskFormData}
       taskDate={taskDate}
+      texts={{
+        title: 'Add task',
+        button: 'Add task',
+      }}
     />,
     document.getElementById('root') || document.body,
   )

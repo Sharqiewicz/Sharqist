@@ -33,6 +33,10 @@ export const EditTaskModal: React.FC<{
       handleTaskFormChange={handleTaskFormChange}
       taskFormData={taskFormData}
       taskDate={taskDate}
+      texts={{
+        title: 'Edit task',
+        button: 'Edit',
+      }}
     />,
     document.getElementById('root') || document.body,
   )
