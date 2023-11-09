@@ -5,6 +5,7 @@ import { Description } from '../../components/Form/Description'
 import { ProjectsList } from '../../components/Form/ProjectsList'
 import { TextInput } from '../../components/Form/TextInput'
 import { ButtonPrimary } from '../../components/Button/ButtonPrimary'
+import { INewTask } from '../../interfaces/ITask'
 
 const ButtonSVG = () => (
   <svg
@@ -22,7 +23,7 @@ const ButtonSVG = () => (
 )
 
 type TaskFormProps = {
-  initialValues: FormState
+  initialValues: INewTask
   handleChange: (event: ChangeEvent) => void
   handleSubmit: FormEventHandler<HTMLFormElement>
   setDate: (date: Date) => void
@@ -39,14 +40,14 @@ export const TaskForm: React.FC<TaskFormProps> = ({
   buttonText,
 }) => (
   <form className='p-4 md:p-5' onSubmit={handleSubmit}>
-    <TextInput handleChange={handleChange} initialValue={initialValues.name} />
+    <TextInput handleChange={handleChange} value={initialValues.name} />
     <div className='flex items-center justify-between'>
       <DatePicker date={date} setDate={setDate} />
       <ProjectsList handleChange={handleChange} />
     </div>
     <Description
       handleChange={handleChange}
-      initialValue={initialValues.description}
+      value={initialValues.description}
     />
     <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
   </form>

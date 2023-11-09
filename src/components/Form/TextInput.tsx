@@ -2,8 +2,10 @@ import { ChangeEvent } from 'react'
 
 export const TextInput = ({
   handleChange,
+  value,
 }: {
   handleChange: (event: ChangeEvent) => void
+  value: string
 }) => (
   <div className='col-span-2'>
     <label
@@ -13,6 +15,7 @@ export const TextInput = ({
       Task name
     </label>
     <input
+      value={value}
       type='text'
       name='name'
       id='name'

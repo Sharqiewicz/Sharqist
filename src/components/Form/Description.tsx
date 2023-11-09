@@ -2,8 +2,10 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 export const Description = ({
   handleChange,
+  value,
 }: {
   handleChange: (event: ChangeEvent) => void
+  value: string
 }) => (
   <div className='col-span-2 mt-5'>
     <label
@@ -13,6 +15,7 @@ export const Description = ({
       Description
     </label>
     <textarea
+      value={value}
       name='description'
       onChange={e => handleChange(e as unknown as ChangeEvent)}
       id='description'
