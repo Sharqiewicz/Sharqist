@@ -31,8 +31,6 @@ const ModalsProvider: React.FC<ModalProviderProps> = ({ children }) => {
     setModals({
       [modalName]: true,
     })
-    console.log('setModalOptions')
-    console.log(modalOptions)
     setModalOptions(modalOptions)
   }
 

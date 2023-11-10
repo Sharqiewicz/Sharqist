@@ -12,9 +12,6 @@ export const EditTaskModal: React.FC<{
 }> = ({ isOpen, closeModal }) => {
   const { modalOptions } = useModal()
 
-  console.log('modalOptions')
-  console.log(modalOptions)
-
   const { handleTaskFormChange, setNewTaskDate, taskDate, taskFormData } =
     useTaskFormReducer(modalOptions)
 

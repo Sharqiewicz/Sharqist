@@ -38,13 +38,6 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
 
   const [taskFormData, setTaskFormData] = useReducer(taskFormReducer, baseState)
 
-  console.log('baseState')
-  console.log(baseState)
-  console.log('initialValue')
-  console.log(initialValue)
-  console.log('taskFormData')
-  console.log(taskFormData)
-
   const handleTaskFormChange = (event: ChangeEvent) => {
     setTaskFormData({
       name: event.target.name,
