@@ -4,8 +4,7 @@ interface CheckIconProps {
 
 const CheckIcon = ({ fillColor }: CheckIconProps) => {
   const svgColor =
-    fillColor ||
-    `text-green-200 text-gray-900 duration-300 hover:text-green-400`
+    fillColor || `text-green-100 duration-300 hover:text-green-400`
 
   const fullSvgColor = `${svgColor} w-12 h-12 cursor-pointer duration-300`
 

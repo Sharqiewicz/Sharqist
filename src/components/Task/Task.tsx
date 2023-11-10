@@ -21,7 +21,7 @@ export const Task = ({
   const isBeforeToday = moment(date).add(1, 'days').isBefore(moment())
 
   const dateClassName = `mb-3 font-normal  ${
-    isBeforeToday ? 'text-red-600' : 'text-gray-500 dark:text-gray-400'
+    isBeforeToday ? 'text-red-500' : 'text-gray-500 dark:text-gray-400'
   }`
 
   const { openModal, MODALS } = useModal()
