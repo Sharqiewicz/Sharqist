@@ -11,7 +11,6 @@ interface TaskModalProps {
   closeModal: () => void
   onSubmit: FormEventHandler<HTMLFormElement>
 
-  taskDate: Date
   taskFormData: INewTask
   setNewTaskDate: (date: Date) => void
   handleTaskFormChange: (event: ChangeEvent) => void
@@ -25,7 +24,6 @@ export const TaskModal = ({
   isOpen,
   closeModal,
   onSubmit,
-  taskDate,
   setNewTaskDate,
   handleTaskFormChange,
   taskFormData,
@@ -42,12 +40,11 @@ export const TaskModal = ({
       <div className='fixed w-2/5 bg-gray-900 rounded-lg shadow min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
         <ModalHeader closeModal={closeModal} text={texts.title} />
         <TaskForm
-          initialValues={taskFormData}
+          taskFormData={taskFormData}
           handleChange={
             handleTaskFormChange as (event: React.ChangeEvent<Element>) => void
           }
           handleSubmit={onSubmit}
-          date={taskDate}
           setDate={setNewTaskDate}
           buttonText={texts.button}
         />

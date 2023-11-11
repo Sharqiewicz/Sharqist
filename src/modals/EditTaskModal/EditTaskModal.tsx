@@ -12,7 +12,7 @@ export const EditTaskModal: React.FC<{
 }> = ({ isOpen, closeModal }) => {
   const { modalOptions } = useModal()
 
-  const { handleTaskFormChange, setNewTaskDate, taskDate, taskFormData } =
+  const { handleTaskFormChange, setNewTaskDate, taskFormData } =
     useTaskFormReducer(modalOptions)
 
   const onSubmit = async (e: any) => {
@@ -22,7 +22,7 @@ export const EditTaskModal: React.FC<{
       await invoke('edit_task', {
         name: taskFormData.name,
         description: taskFormData.description || '',
-        date: moment.utc(taskDate).startOf('day').format('YYYY-MM-DD'),
+        date: moment.utc(taskFormData.date).startOf('day').format('YYYY-MM-DD'),
         id: modalOptions.id,
       })
     }
@@ -40,7 +40,6 @@ export const EditTaskModal: React.FC<{
       setNewTaskDate={setNewTaskDate}
       handleTaskFormChange={handleTaskFormChange}
       taskFormData={taskFormData}
-      taskDate={taskDate}
       texts={{
         title: 'Edit task',
         button: 'Edit',

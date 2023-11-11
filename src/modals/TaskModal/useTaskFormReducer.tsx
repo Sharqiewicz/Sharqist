@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import moment from 'moment'
 
 import { ChangeEvent } from '../TaskModal/TaskModal'
@@ -8,16 +8,15 @@ type TaskFormState = INewTask
 
 type TaskFormAction = {
   name: string
-  value: string | number | boolean
+  value: string | number | boolean | Date
 }
 
 export const useTaskFormReducer = (initialValue?: INewTask) => {
-  const [taskDate, setTaskDate] = useState(
-    moment.utc(new Date()).startOf('day').toDate(),
-  )
-
   const setNewTaskDate = (date: Date) => {
-    setTaskDate(moment.utc(date).startOf('day').toDate())
+    setTaskFormData({
+      name: 'date',
+      value: moment.utc(date).startOf('day').toDate(),
+    })
   }
 
   const taskFormReducer = (state: TaskFormState, event: TaskFormAction) => {
@@ -28,7 +27,7 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
   }
 
   const baseInitalValue: INewTask = {
-    date: '',
+    date: moment.utc(new Date()).startOf('day').toDate(),
     description: '',
     is_done: false,
     name: '',
@@ -50,7 +49,11 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
   useEffect(() => {
     if (initialValue) {
       for (const [key, value] of Object.entries(initialValue)) {
-        setTaskFormData({ name: key, value })
+        if (key === 'date') {
+          setNewTaskDate(new Date(value as string))
+        } else {
+          setTaskFormData({ name: key, value })
+        }
       }
     }
   }, [initialValue])
@@ -59,6 +62,5 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
     handleTaskFormChange,
     taskFormData,
     setNewTaskDate,
-    taskDate,
   }
 }

@@ -1,4 +1,3 @@
-// TaskForm.tsx
 import React, { ChangeEvent, FormEventHandler } from 'react'
 import { DatePicker } from '../../components/Form/DatePicker'
 import { Description } from '../../components/Form/Description'
@@ -23,32 +22,27 @@ const ButtonSVG = () => (
 )
 
 type TaskFormProps = {
-  initialValues: INewTask
+  taskFormData: INewTask
   handleChange: (event: ChangeEvent) => void
   handleSubmit: FormEventHandler<HTMLFormElement>
   setDate: (date: Date) => void
-  date: Date
   buttonText: string
 }
 
 export const TaskForm: React.FC<TaskFormProps> = ({
-  initialValues,
+  taskFormData,
   handleChange,
   handleSubmit,
-  date,
   setDate,
   buttonText,
 }) => (
   <form className='p-4 md:p-5' onSubmit={handleSubmit}>
-    <TextInput handleChange={handleChange} value={initialValues.name} />
+    <TextInput handleChange={handleChange} value={taskFormData.name} />
     <div className='flex items-center justify-between'>
-      <DatePicker date={date} setDate={setDate} />
+      <DatePicker date={taskFormData.date} setDate={setDate} />
       <ProjectsList handleChange={handleChange} />
     </div>
-    <Description
-      handleChange={handleChange}
-      value={initialValues.description}
-    />
+    <Description handleChange={handleChange} value={taskFormData.description} />
     <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
   </form>
 )
