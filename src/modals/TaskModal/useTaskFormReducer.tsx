@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import moment from 'moment'
 
 import { ChangeEvent } from '../TaskModal/TaskModal'
@@ -34,16 +34,26 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
     name: '',
   }
 
-  const baseState = initialValue || baseInitalValue
-
-  const [taskFormData, setTaskFormData] = useReducer(taskFormReducer, baseState)
+  const [taskFormData, setTaskFormData] = useReducer(
+    taskFormReducer,
+    baseInitalValue,
+  )
 
   const handleTaskFormChange = (event: ChangeEvent) => {
-    setTaskFormData({
+    const action = {
       name: event.target.name,
       value: event.target.value,
-    })
+    }
+    setTaskFormData(action)
   }
+
+  useEffect(() => {
+    if (initialValue) {
+      for (const [key, value] of Object.entries(initialValue)) {
+        setTaskFormData({ name: key, value })
+      }
+    }
+  }, [initialValue])
 
   return {
     handleTaskFormChange,

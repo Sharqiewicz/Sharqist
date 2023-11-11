@@ -30,6 +30,8 @@ export const EditTaskModal: React.FC<{
 
   if (!isOpen) return null
 
+  console.log('taskFormData')
+  console.log(taskFormData)
   return createPortal(
     <TaskModal
       isOpen={isOpen}
