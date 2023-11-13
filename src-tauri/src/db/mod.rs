@@ -83,6 +83,31 @@ pub fn add_task_to_db(name: String, description: String, date: String) -> String
     }
 }
 
+pub fn edit_task_db(name: String, description: String, date: String, id: i32) -> String {
+    let new_task: Task = Task {
+        name: name,
+        description: description,
+        date: date,
+        is_done: false,
+        id,
+    };
+
+    let connection: Connection = open_database_connection();
+
+    match connection.execute(
+        "UPDATE tasks SET name = ?1, description = ?2, date = ?3 WHERE id = ?4",
+        (
+            &new_task.name,
+            &new_task.description,
+            &new_task.date,
+            &new_task.id,
+        ),
+    ) {
+        Ok(_) => "Task edited".to_string(),
+        Err(_) => "Task editing failed.".to_string(),
+    }
+}
+
 pub fn delete_task_from_db(id: i32) -> String {
     let connection: Connection = open_database_connection();
 

@@ -1,6 +1,6 @@
 use crate::{
     db::{
-        add_task_to_db, delete_task_from_db, get_all_tasks_from_db, set_task_done_db,
+        add_task_to_db, delete_task_from_db, edit_task_db, get_all_tasks_from_db, set_task_done_db,
         set_task_undone_db, TaskVariants,
     },
     structs::Task,
@@ -14,6 +14,11 @@ pub fn delete_task(id: i32) -> String {
 #[tauri::command]
 pub fn add_task(name: String, description: String, date: String) -> String {
     add_task_to_db(name, description, date)
+}
+
+#[tauri::command]
+pub fn edit_task(name: String, description: String, date: String, id: i32) -> String {
+    edit_task_db(name, description, date, id)
 }
 
 #[tauri::command]
