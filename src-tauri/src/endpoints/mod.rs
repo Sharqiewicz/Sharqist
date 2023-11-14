@@ -55,3 +55,7 @@ pub fn set_task_done(id: i32) -> String {
 pub fn set_task_undone(id: i32) -> String {
     set_task_undone_db(id)
 }
+
+pub fn get_all_projects() -> Result<Vec<Project>, String> {
+    get_all_projects_from_db()
+}
