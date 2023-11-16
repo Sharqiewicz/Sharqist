@@ -177,3 +177,25 @@ pub fn get_all_projects_from_db() -> Result<Vec<Project>, String> {
         Err(_) => Err("Error while getting all projects".into()),
     }
 }
+
+pub fn add_project_to_db(name: String, description: String, color: String) -> String {
+    let new_project: NewProject = NewProject {
+        name: name,
+        description: description,
+        color: color,
+    };
+
+    let connection: Connection = open_database_connection();
+
+    match connection.execute(
+        "INSERT INTO projects (name, description, color) VALUES (?1, ?2, ?3)",
+        (
+            &new_project.name,
+            &new_project.description,
+            &new_project.color,
+        ),
+    ) {
+        Ok(_) => "Project added".to_string(),
+        Err(_) => "Project addition failed.".to_string(),
+    }
+}
