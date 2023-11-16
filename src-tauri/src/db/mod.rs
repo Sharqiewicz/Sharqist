@@ -153,3 +153,27 @@ pub fn set_task_undone_db(id: i32) -> String {
         Err(_) => "Task marking as undone failed.".to_string(),
     }
 }
+
+pub fn get_all_projects_from_db() -> Result<Vec<Project>, String> {
+    let connection: Connection = open_database_connection();
+
+    let mut projects: rusqlite::Statement<'_> = connection
+        .prepare("SELECT id, name, description, color FROM projects")
+        .expect("Failed to prepare query");
+
+    let projects_iter = projects
+        .query_map([], |row| {
+            Ok(Project {
+                id: row.get(0)?,
+                name: row.get(1)?,
+                description: row.get(2)?,
+                color: row.get(3)?,
+            })
+        })
+        .expect("Failed to prepare query");
+
+    match projects_iter.collect::<Result<Vec<_>, _>>() {
+        Ok(projects) => Ok(projects),
+        Err(_) => Err("Error while getting all projects".into()),
+    }
+}
