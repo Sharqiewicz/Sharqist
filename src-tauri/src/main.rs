@@ -34,14 +34,14 @@ fn main() -> Result<()> {
     }
 
     if !does_table_exist(&connection, "projects")? {
-        let create_task_table = "CREATE TABLE projects (
+        let create_projects_table = "CREATE TABLE projects (
             id    INTEGER PRIMARY KEY,
             name  TEXT NOT NULL,
             description  TEXT,
             color TEXT NOT NULL DEFAULT '#a5aadf',
         )";
         connection.execute(
-            create_task_table,
+            create_projects_table,
             (), // empty list of parameters.
         )?;
     }
