@@ -1,8 +1,9 @@
 use crate::{
     db::{
-        add_task_to_db, delete_task_from_db, edit_task_db, get_all_tasks_from_db, set_task_done_db,
-        set_task_undone_db, TaskVariants,
+        add_task_to_db, delete_task_from_db, edit_task_db, get_all_projects_from_db,
+        get_all_tasks_from_db, set_task_done_db, set_task_undone_db, TaskVariants,
     },
+    structs::Project,
     structs::Task,
 };
 
