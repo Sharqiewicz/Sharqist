@@ -199,3 +199,12 @@ pub fn add_project_to_db(name: String, description: String, color: String) -> St
         Err(_) => "Project addition failed.".to_string(),
     }
 }
+
+pub fn delete_project_from_db(id: i32) -> String {
+    let connection: Connection = open_database_connection();
+
+    match connection.execute("DELETE FROM projects WHERE id = ?1", &[&id]) {
+        Ok(_) => "Project deleted".to_string(),
+        Err(_) => "Project deletion failed.".to_string(),
+    }
+}
