@@ -1,6 +1,6 @@
 use rusqlite::{Connection, Result};
 
-use crate::structs::{NewTask, Task};
+use crate::structs::{NewProject, NewTask, Project, Task};
 
 pub fn open_database_connection() -> Connection {
     return Connection::open("sharqist.db").expect("Failed to open connection to the database");
