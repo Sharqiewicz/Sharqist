@@ -41,8 +41,15 @@ const UPCOMING: Subpage = {
   icon: <CalendarOutlineIcon />,
 }
 
+const PROJECTS_LIST: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Projects',
+  icon: <CalendarOutlineIcon />,
+}
+
 function Sidebar() {
   const SUBPAGES: Subpage[] = [INBOX, TODAY, HISTORY, UPCOMING]
+  const PROJECT_SUBPAGES: Subpage[] = [PROJECTS_LIST]
 
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (
@@ -51,6 +58,14 @@ function Sidebar() {
 
     return renderedSubpages
   }, [SUBPAGES])
+
+  const project_subpages = useMemo(() => {
+    const renderedSubpages = PROJECT_SUBPAGES.map(subpage => (
+      <SidebarListItem key={subpage.name} subpage={subpage} />
+    ))
+
+    return renderedSubpages
+  }, [PROJECT_SUBPAGES])
 
   const { isSidebarOpen } = useSidebar()
 
@@ -68,6 +83,8 @@ function Sidebar() {
           </span>
         </div>
         <ul className='space-y-2 font-medium'>{subpages}</ul>
+        <hr className='my-3' />
+        <ul className='space-y-2 font-medium'>{project_subpages}</ul>
       </div>
     </aside>
   )

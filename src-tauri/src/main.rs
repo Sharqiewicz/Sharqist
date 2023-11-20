@@ -39,7 +39,7 @@ fn main() -> Result<()> {
             id    INTEGER PRIMARY KEY,
             name  TEXT NOT NULL,
             description  TEXT,
-            color TEXT NOT NULL DEFAULT '#a5aadf',
+            color TEXT NOT NULL DEFAULT \"#a5aadf\"
         )";
         connection.execute(
             create_projects_table,

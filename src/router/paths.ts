@@ -6,6 +6,7 @@ export enum PATHS {
   ADD_TASK = 'add-task',
   HISTORY = 'history',
   UPCOMING = 'upcoming',
+  PROJECTS_LIST = 'projects-list',
 }
 
 export type PathKeys = (typeof PATHS)[keyof typeof PATHS]
