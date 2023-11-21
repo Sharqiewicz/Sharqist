@@ -11,6 +11,7 @@ import {
 import { useSidebar } from '../../hooks'
 
 import { SidebarListItem } from './SidebarListItem'
+import { BookIcon } from '../../assets/icons/BookIcon'
 export interface Subpage {
   path: PathKeys
   name: string
@@ -44,7 +45,7 @@ const UPCOMING: Subpage = {
 const PROJECTS_LIST: Subpage = {
   path: PATHS.PROJECTS_LIST,
   name: 'Projects',
-  icon: <CalendarOutlineIcon />,
+  icon: <BookIcon />,
 }
 
 function Sidebar() {
