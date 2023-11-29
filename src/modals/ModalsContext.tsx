@@ -4,6 +4,7 @@ import { ITask } from '../interfaces/ITask'
 enum MODALS_ENUM {
   ADD_TASK_MODAL = 'AddTaskModal',
   EDIT_TASK_MODAL = 'EditTaskModal',
+  ADD_PROJECT_MODAL = 'AddProjectModal',
 }
 
 export type ModalsKeys = (typeof MODALS_ENUM)[keyof typeof MODALS_ENUM]

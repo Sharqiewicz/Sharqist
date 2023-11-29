@@ -17,6 +17,7 @@ import { ModalsManager } from './modals/ModalsManager'
 import { SidebarProvider } from './hooks'
 
 import { PATHS } from './router/paths'
+import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path={PATHS.INBOX} element={<InboxPage />} />
       <Route path={PATHS.HISTORY} element={<HistoryPage />} />
       <Route path={PATHS.UPCOMING} element={<UpcomingPage />} />
+      <Route path={PATHS.PROJECTS_LIST} element={<ProjectsPage />} />
       <Route path={PATHS.DEFAULT} element={<InboxPage />} />
     </>,
   ),
