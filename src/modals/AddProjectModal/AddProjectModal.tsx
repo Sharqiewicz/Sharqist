@@ -16,7 +16,7 @@ export const AddProjectModal: React.FC<{
     await invoke('add_project', {
       name: projectFormData.name,
       description: projectFormData.description || '',
-      color: '#000000',
+      color: projectFormData.color,
     })
   }
 
