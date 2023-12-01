@@ -24,6 +24,7 @@ export const EditTaskModal: React.FC<{
         description: taskFormData.description || '',
         date: moment.utc(taskFormData.date).startOf('day').format('YYYY-MM-DD'),
         id: modalOptions.id,
+        projectId: Number(taskFormData.project_id) || null,
       })
     }
   }

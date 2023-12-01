@@ -25,17 +25,12 @@ export const AddTaskModal: React.FC<{
         .format('YYYY-MM-DD') as unknown as Date,
     }
 
-    console.log('taskFormData')
-    console.log(taskFormData)
-    console.log(taskFormData.project_id)
-
     //@ts-ignore
     if (taskFormData.project_id !== 'None') {
       //@ts-ignore
-      task['projectId'] = taskFormData.project_id
+      task['projectId'] = Number(taskFormData.project_id)
     }
 
-    console.log('sending!', task)
     await invoke('add_task', task)
   }
 

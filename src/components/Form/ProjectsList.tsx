@@ -3,8 +3,10 @@ import { useFetchProjects } from '../../hooks/useFetchProjects'
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 export const ProjectsList = ({
+  value,
   handleChange,
 }: {
+  value?: number
   handleChange: (event: ChangeEvent) => void
 }) => {
   const { projects } = useFetchProjects()
@@ -18,6 +20,7 @@ export const ProjectsList = ({
         Project
       </label>
       <select
+        value={value}
         onChange={e => handleChange(e as unknown as ChangeEvent)}
         id='project_id'
         name='project_id'

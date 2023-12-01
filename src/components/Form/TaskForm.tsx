@@ -40,7 +40,10 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     <TextInput handleChange={handleChange} value={taskFormData.name} />
     <div className='flex items-center justify-between'>
       <DatePicker date={taskFormData.date} setDate={setDate} />
-      <ProjectsList handleChange={handleChange} />
+      <ProjectsList
+        handleChange={handleChange}
+        value={taskFormData.project_id}
+      />
     </div>
     <Description handleChange={handleChange} value={taskFormData.description} />
     <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
