@@ -14,13 +14,29 @@ pub fn delete_task(id: i32) -> String {
 }
 
 #[tauri::command]
-pub fn add_task(name: String, description: String, date: String) -> String {
-    add_task_to_db(name, description, date)
+pub fn add_task(
+    name: String,
+    description: String,
+    date: String,
+    project_id: Option<i32>,
+) -> String {
+    println!("project_id");
+    println!("{:?}", name);
+    println!("{:?}", description);
+    println!("{:?}", date);
+    println!("{:?}", project_id);
+    add_task_to_db(name, description, date, project_id)
 }
 
 #[tauri::command]
-pub fn edit_task(name: String, description: String, date: String, id: i32) -> String {
-    edit_task_db(name, description, date, id)
+pub fn edit_task(
+    name: String,
+    description: String,
+    date: String,
+    id: i32,
+    project_id: Option<i32>,
+) -> String {
+    edit_task_db(name, description, date, id, project_id)
 }
 
 #[tauri::command]

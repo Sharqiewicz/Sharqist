@@ -4,22 +4,39 @@ import moment from 'moment'
 
 import { TaskModal } from '../TaskModal/TaskModal'
 import { useTaskFormReducer } from '../TaskModal/useTaskFormReducer'
+import { INewTask } from '../../interfaces/ITask'
 
 export const AddTaskModal: React.FC<{
   isOpen: boolean
   closeModal: () => void
 }> = ({ isOpen, closeModal }) => {
-  const { handleTaskFormChange, setNewTaskDate, taskDate, taskFormData } =
+  const { handleTaskFormChange, setNewTaskDate, taskFormData } =
     useTaskFormReducer()
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
 
-    await invoke('add_task', {
+    const task: Omit<INewTask, 'is_done'> = {
       name: taskFormData.name,
       description: taskFormData.description || '',
-      date: moment.utc(taskDate).startOf('day').format('YYYY-MM-DD'),
-    })
+      date: moment
+        .utc(taskFormData.date)
+        .startOf('day')
+        .format('YYYY-MM-DD') as unknown as Date,
+    }
+
+    console.log('taskFormData')
+    console.log(taskFormData)
+    console.log(taskFormData.project_id)
+
+    //@ts-ignore
+    if (taskFormData.project_id !== 'None') {
+      //@ts-ignore
+      task['projectId'] = taskFormData.project_id
+    }
+
+    console.log('sending!', task)
+    await invoke('add_task', task)
   }
 
   if (!isOpen) return null
@@ -32,7 +49,6 @@ export const AddTaskModal: React.FC<{
       setNewTaskDate={setNewTaskDate}
       handleTaskFormChange={handleTaskFormChange}
       taskFormData={taskFormData}
-      taskDate={taskDate}
       texts={{
         title: 'Add task',
         button: 'Add task',

@@ -26,7 +26,8 @@ fn main() -> Result<()> {
             name  TEXT NOT NULL,
             description  TEXT,
             date  TEXT,
-            is_done  BOOLEAN NOT NULL DEFAULT FALSE
+            is_done  BOOLEAN NOT NULL DEFAULT FALSE,
+            project_id INTEGER
         )";
         connection.execute(
             create_task_table,

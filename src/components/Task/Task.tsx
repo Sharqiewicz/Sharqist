@@ -8,6 +8,7 @@ import { CheckIcon } from '../../assets/icons/CheckIcon'
 import clickSound from '../../assets/sounds/pop.mp3'
 import trashSound from '../../assets/sounds/trash.mp3'
 import { useModal } from '../../modals/ModalsContext'
+import { useFetchProjects } from '../../hooks/useFetchProjects'
 
 export const Task = ({
   task,
@@ -17,6 +18,8 @@ export const Task = ({
   forceTasksFetchUpdate: () => void
 }) => {
   const { name, description, date, id } = task
+
+  const { projects } = useFetchProjects()
 
   const isBeforeToday = moment(date).add(1, 'days').isBefore(moment())
 
@@ -86,8 +89,20 @@ export const Task = ({
       </button>
     )
 
+  console.log(task)
+  console.log(projects)
+  console.log('color')
+  console.log(projects.find(project => project.id === task.project_id)?.color)
+
   return (
-    <div className='relative w-full p-6 mb-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div
+      className='relative w-full p-6 mb-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
+      style={{
+        backgroundColor: projects.find(
+          project => project.id === task.project_id,
+        )?.color,
+      }}
+    >
       {renderIsDoneButton()}
       <Dropdown
         options={dropdownOptions}

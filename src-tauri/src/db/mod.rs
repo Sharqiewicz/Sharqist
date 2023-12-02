@@ -19,25 +19,25 @@ pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String>
 
     let mut tasks: rusqlite::Statement<'_> = match variant {
         TaskVariants::Inbox => connection
-            .prepare("SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 0 AND date(date) <= date('now') AND is_done = 0")
+            .prepare("SELECT id, name, description, date, is_done, project_id FROM tasks WHERE is_done = 0 AND date(date) <= date('now') AND is_done = 0")
             .expect("Failed to prepare query"),
         TaskVariants::Today => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE date(date) = date('now') AND is_done = 0",
+                "SELECT id, name, description, date, is_done, project_id FROM tasks WHERE date(date) = date('now') AND is_done = 0",
             )
             .expect("Failed to prepare query"),
         TaskVariants::History => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE is_done = 1",
+                "SELECT id, name, description, date, is_done, project_id FROM tasks WHERE is_done = 1",
             )
             .expect("Failed to prepare query"),
         TaskVariants::Future => connection
             .prepare(
-                "SELECT id, name, description, date, is_done FROM tasks WHERE date(date) > date('now') AND is_done = 0",
+                "SELECT id, name, description, date, is_done, project_id FROM tasks WHERE date(date) > date('now') AND is_done = 0",
             )
             .expect("Failed to prepare query"),
         _ => connection
-            .prepare("SELECT id, name, description, date, is_done FROM tasks")
+            .prepare("SELECT id, name, description, date, is_done, project_id FROM tasks")
             .expect("Failed to prepare query"),
     };
 
@@ -49,6 +49,7 @@ pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String>
                 description: row.get(2)?,
                 date: row.get(3)?,
                 is_done: row.get(4)?,
+                project_id: row.get(5)?,
             })
         })
         .expect("Failed to prepare query");
@@ -59,23 +60,32 @@ pub fn get_all_tasks_from_db(variant: TaskVariants) -> Result<Vec<Task>, String>
     }
 }
 
-pub fn add_task_to_db(name: String, description: String, date: String) -> String {
+pub fn add_task_to_db(
+    name: String,
+    description: String,
+    date: String,
+    project_id: Option<i32>,
+) -> String {
     let new_task: NewTask = NewTask {
         name: name,
         description: description,
         date: date,
         is_done: false,
+        project_id: project_id,
     };
 
     let connection: Connection = open_database_connection();
 
+    println!("New Task: {:?}", new_task);
+
     match connection.execute(
-        "INSERT INTO tasks (name, description, date, is_done) VALUES (?1, ?2, ?3, ?4)",
+        "INSERT INTO tasks (name, description, date, is_done, project_id) VALUES (?1, ?2, ?3, ?4, ?5)",
         (
             &new_task.name,
             &new_task.description,
             &new_task.date,
             &new_task.is_done,
+            &new_task.project_id,
         ),
     ) {
         Ok(_) => "Task added".to_string(),
@@ -83,23 +93,31 @@ pub fn add_task_to_db(name: String, description: String, date: String) -> String
     }
 }
 
-pub fn edit_task_db(name: String, description: String, date: String, id: i32) -> String {
+pub fn edit_task_db(
+    name: String,
+    description: String,
+    date: String,
+    id: i32,
+    project_id: Option<i32>,
+) -> String {
     let new_task: Task = Task {
         name: name,
         description: description,
         date: date,
         is_done: false,
         id,
+        project_id,
     };
 
     let connection: Connection = open_database_connection();
 
     match connection.execute(
-        "UPDATE tasks SET name = ?1, description = ?2, date = ?3 WHERE id = ?4",
+        "UPDATE tasks SET name = ?1, description = ?2, date = ?3, project_id = ?4 WHERE id = ?5",
         (
             &new_task.name,
             &new_task.description,
             &new_task.date,
+            &new_task.project_id,
             &new_task.id,
         ),
     ) {
