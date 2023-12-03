@@ -1,8 +1,8 @@
 use crate::{
     db::{
         add_project_to_db, add_task_to_db, delete_project_from_db, delete_task_from_db,
-        edit_task_db, get_all_projects_from_db, get_all_tasks_from_db, set_task_done_db,
-        set_task_undone_db, TaskVariants,
+        edit_project_db, edit_task_db, get_all_projects_from_db, get_all_tasks_from_db,
+        set_task_done_db, set_task_undone_db, TaskVariants,
     },
     structs::Project,
     structs::Task,
@@ -20,11 +20,6 @@ pub fn add_task(
     date: String,
     project_id: Option<i32>,
 ) -> String {
-    println!("project_id");
-    println!("{:?}", name);
-    println!("{:?}", description);
-    println!("{:?}", date);
-    println!("{:?}", project_id);
     add_task_to_db(name, description, date, project_id)
 }
 
@@ -87,4 +82,9 @@ pub fn add_project(name: String, description: String, color: String) -> String {
 #[tauri::command]
 pub fn delete_project(id: i32) -> String {
     delete_project_from_db(id)
+}
+
+#[tauri::command]
+pub fn edit_project(name: String, description: String, color: String, id: i32) -> String {
+    edit_project_db(name, description, color, id)
 }
