@@ -70,6 +70,10 @@ export const Task = ({
     },
   ]
 
+  const projectColor = projects.find(
+    project => project.id === task.project_id,
+  )?.color
+
   const renderIsDoneButton = () =>
     task.is_done ? (
       <button
@@ -77,7 +81,11 @@ export const Task = ({
         type='button'
         onClick={setUndone}
       >
-        <CheckIcon fillColor='text-green-400 hover:text-red-400' />
+        {projectColor ? (
+          <CheckIcon inlineColor={projectColor} />
+        ) : (
+          <CheckIcon fillColor='text-green-400 hover:text-red-400' />
+        )}
       </button>
     ) : (
       <button
@@ -85,22 +93,19 @@ export const Task = ({
         type='button'
         onClick={setIsDone}
       >
-        <CheckIcon />
+        {projectColor ? (
+          <CheckIcon inlineColor={projectColor} />
+        ) : (
+          <CheckIcon />
+        )}
       </button>
     )
 
-  console.log(task)
-  console.log(projects)
-  console.log('color')
-  console.log(projects.find(project => project.id === task.project_id)?.color)
-
   return (
     <div
-      className='relative w-full p-6 mb-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
+      className='relative w-full p-6 mb-3 bg-white border border-4 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
       style={{
-        backgroundColor: projects.find(
-          project => project.id === task.project_id,
-        )?.color,
+        borderColor: projectColor,
       }}
     >
       {renderIsDoneButton()}
