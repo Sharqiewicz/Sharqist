@@ -12,9 +12,9 @@ use db::{does_table_exist, open_database_connection};
 mod endpoints;
 
 use endpoints::{
-    add_project, add_task, delete_project, delete_task, edit_task, get_all_projects, get_all_tasks,
-    get_future_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks, set_task_done,
-    set_task_undone,
+    add_project, add_task, delete_project, delete_task, edit_project, edit_task, get_all_projects,
+    get_all_tasks, get_future_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks,
+    set_task_done, set_task_undone,
 };
 
 fn main() -> Result<()> {
@@ -62,7 +62,8 @@ fn main() -> Result<()> {
             edit_task,
             get_all_projects,
             add_project,
-            delete_project
+            delete_project,
+            edit_project
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
