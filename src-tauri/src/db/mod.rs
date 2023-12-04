@@ -76,8 +76,6 @@ pub fn add_task_to_db(
 
     let connection: Connection = open_database_connection();
 
-    println!("New Task: {:?}", new_task);
-
     match connection.execute(
         "INSERT INTO tasks (name, description, date, is_done, project_id) VALUES (?1, ?2, ?3, ?4, ?5)",
         (
@@ -224,5 +222,29 @@ pub fn delete_project_from_db(id: i32) -> String {
     match connection.execute("DELETE FROM projects WHERE id = ?1", &[&id]) {
         Ok(_) => "Project deleted".to_string(),
         Err(_) => "Project deletion failed.".to_string(),
+    }
+}
+
+pub fn edit_project_db(name: String, description: String, color: String, id: i32) -> String {
+    let new_project: Project = Project {
+        name: name,
+        description: description,
+        color: color,
+        id,
+    };
+
+    let connection: Connection = open_database_connection();
+
+    match connection.execute(
+        "UPDATE projects SET name = ?1, description = ?2, color = ?3 WHERE id = ?4",
+        (
+            &new_project.name,
+            &new_project.description,
+            &new_project.color,
+            &new_project.id,
+        ),
+    ) {
+        Ok(_) => "Project edited".to_string(),
+        Err(_) => "Project editing failed.".to_string(),
     }
 }
