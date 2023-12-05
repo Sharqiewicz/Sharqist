@@ -46,8 +46,6 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
       value: event.target.value,
     }
 
-    console.log(action)
-
     setTaskFormData(action)
   }
 
