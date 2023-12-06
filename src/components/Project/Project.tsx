@@ -3,6 +3,7 @@ import { IProject } from '../../interfaces/IProject'
 import { Dropdown, DropdownOption } from '../Dropdown/Dropdown'
 import { PenIcon, TrashIcon } from '../../assets/icons'
 import trashSound from '../../assets/sounds/trash.mp3'
+import { useModal } from '../../modals/ModalsContext'
 
 export const Project = ({
   project,
@@ -11,10 +12,11 @@ export const Project = ({
   project: IProject
   forceProjectsFetchUpdate: () => void
 }) => {
+  const { openModal, MODALS } = useModal()
   const { name, description, color, id } = project
 
   const editProject = () => {
-    // openModal(MODALS.EDIT_PROJECT_MODAL, project)
+    openModal(MODALS.EDIT_PROJECT_MODAL, project)
   }
 
   const deleteProject = async () => {
