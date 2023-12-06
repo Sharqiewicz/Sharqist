@@ -5,6 +5,7 @@ import moment from 'moment'
 import { TaskModal } from '../TaskModal/TaskModal'
 import { useTaskFormReducer } from '../TaskModal/useTaskFormReducer'
 import { useModal } from '../ModalsContext'
+import { INewTask } from '../../interfaces/ITask'
 
 export const EditTaskModal: React.FC<{
   isOpen: boolean
@@ -13,7 +14,7 @@ export const EditTaskModal: React.FC<{
   const { modalOptions } = useModal()
 
   const { handleTaskFormChange, setNewTaskDate, taskFormData } =
-    useTaskFormReducer(modalOptions)
+    useTaskFormReducer(modalOptions as INewTask)
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
@@ -31,8 +32,6 @@ export const EditTaskModal: React.FC<{
 
   if (!isOpen) return null
 
-  console.log('taskFormData')
-  console.log(taskFormData)
   return createPortal(
     <TaskModal
       isOpen={isOpen}
