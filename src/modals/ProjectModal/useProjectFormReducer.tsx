@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 
 import { ChangeEvent } from '../ProjectModal/ProjectModal'
 import { INewProject } from '../../interfaces/IProject'
@@ -29,7 +29,7 @@ export const useProjectFormReducer = (initialValue?: INewProject) => {
 
   const [projectFormData, setProjectFormData] = useReducer(
     projectFormReducer,
-    initialValue || baseInitalValue,
+    baseInitalValue,
   )
 
   const handleProjectFormChange = (event: ChangeEvent) => {
@@ -38,6 +38,14 @@ export const useProjectFormReducer = (initialValue?: INewProject) => {
       value: event.target.value,
     })
   }
+
+  useEffect(() => {
+    if (initialValue) {
+      for (const [key, value] of Object.entries(initialValue)) {
+        setProjectFormData({ name: key, value })
+      }
+    }
+  }, [initialValue])
 
   return { projectFormData, handleProjectFormChange }
 }
