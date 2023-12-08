@@ -3,6 +3,7 @@ import { useModal } from './ModalsContext'
 import { AddTaskModal } from './AddTaskModal/AddTaskModal'
 import { EditTaskModal } from './EditTaskModal/EditTaskModal'
 import { AddProjectModal } from './AddProjectModal/AddProjectModal'
+import { EditProjectModal } from './EditProjectModal/EditProjectModal'
 
 const ModalsManager: React.FC = () => {
   const { modals, closeModal, MODALS } = useModal()
@@ -20,6 +21,10 @@ const ModalsManager: React.FC = () => {
       <AddProjectModal
         closeModal={() => closeModal(MODALS.ADD_PROJECT_MODAL)}
         isOpen={modals[MODALS.ADD_PROJECT_MODAL]}
+      />
+      <EditProjectModal
+        closeModal={() => closeModal(MODALS.EDIT_PROJECT_MODAL)}
+        isOpen={modals[MODALS.EDIT_PROJECT_MODAL]}
       />
     </>
   )
