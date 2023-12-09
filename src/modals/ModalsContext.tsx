@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { ITask } from '../interfaces/ITask'
+import { IProject } from '../interfaces/IProject'
 
 enum MODALS_ENUM {
   ADD_TASK_MODAL = 'AddTaskModal',
   EDIT_TASK_MODAL = 'EditTaskModal',
   ADD_PROJECT_MODAL = 'AddProjectModal',
+  EDIT_PROJECT_MODAL = 'EditProjectModal',
 }
 
 export type ModalsKeys = (typeof MODALS_ENUM)[keyof typeof MODALS_ENUM]
 
-export type ModalOptions = ITask | undefined
+export type ModalOptions = ITask | IProject | undefined
 interface ModalContextProps {
   modals: Record<string, boolean>
   openModal: (modalName: ModalsKeys, modalOptions?: ModalOptions) => void
