@@ -117,7 +117,7 @@ export const Task = ({
         <h1 className='mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white'>
           {name}
         </h1>
-        <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
+        <p className='mb-3 overflow-hidden font-normal text-gray-500 break-words dark:text-gray-400 overflow-wrap'>
           {description}
         </p>
         <div className='flex'>
