@@ -4,6 +4,7 @@ import { Dropdown, DropdownOption } from '../Dropdown/Dropdown'
 import { PenIcon, TrashIcon } from '../../assets/icons'
 import trashSound from '../../assets/sounds/trash.mp3'
 import { useModal } from '../../modals/ModalsContext'
+import { useEffect } from 'react'
 
 export const Project = ({
   project,
@@ -12,8 +13,18 @@ export const Project = ({
   project: IProject
   forceProjectsFetchUpdate: () => void
 }) => {
-  const { openModal, MODALS } = useModal()
+  const { openModal, MODALS, modals } = useModal()
   const { name, description, color, id } = project
+
+  useEffect(() => {
+    console.log('useEffect Project', modals)
+    if (
+      modals[MODALS.ADD_PROJECT_MODAL] === false ||
+      modals[MODALS.EDIT_PROJECT_MODAL] === false
+    ) {
+      forceProjectsFetchUpdate()
+    }
+  }, [modals[MODALS.EDIT_PROJECT_MODAL], modals[MODALS.ADD_PROJECT_MODAL]])
 
   const editProject = () => {
     openModal(MODALS.EDIT_PROJECT_MODAL, project)
