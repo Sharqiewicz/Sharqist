@@ -6,7 +6,6 @@ import { ITask } from '../interfaces/ITask'
 
 const useFetchTasks = (taskType: string) => {
   const [tasks, setTasks] = useState<ITask[]>([])
-  const [,] = useState<ITask[]>([])
 
   const fetchTasks = async () => {
     const allTasks: ITask[] = await invoke(taskType)
