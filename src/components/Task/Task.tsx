@@ -9,6 +9,7 @@ import clickSound from '../../assets/sounds/pop.mp3'
 import trashSound from '../../assets/sounds/trash.mp3'
 import { useModal } from '../../modals/ModalsContext'
 import { useFetchProjects } from '../../hooks/useFetchProjects'
+import { useEffect } from 'react'
 
 export const Task = ({
   task,
@@ -27,7 +28,17 @@ export const Task = ({
     isBeforeToday ? 'text-red-500' : 'text-gray-500 dark:text-gray-400'
   }`
 
-  const { openModal, MODALS } = useModal()
+  const { openModal, MODALS, modals } = useModal()
+
+  useEffect(() => {
+    console.log('useEffect Task', modals)
+    if (
+      modals[MODALS.EDIT_TASK_MODAL] === false ||
+      modals[MODALS.ADD_TASK_MODAL] === false
+    ) {
+      forceTasksFetchUpdate()
+    }
+  }, [modals[MODALS.EDIT_TASK_MODAL], modals[MODALS.ADD_TASK_MODAL]])
 
   const editTask = () => {
     openModal(MODALS.EDIT_TASK_MODAL, task)
