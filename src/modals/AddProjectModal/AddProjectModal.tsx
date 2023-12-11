@@ -18,6 +18,8 @@ export const AddProjectModal: React.FC<{
       description: projectFormData.description || '',
       color: projectFormData.color,
     })
+
+    closeModal()
   }
 
   if (!isOpen) return null
