@@ -27,6 +27,8 @@ export const EditProjectModal: React.FC<{
       color: projectFormData.color,
       id: modalOptions.id,
     })
+
+    closeModal()
   }
 
   if (!isOpen) return null
