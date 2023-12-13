@@ -17,7 +17,6 @@ export const Project = ({
   const { name, description, color, id } = project
 
   useEffect(() => {
-    console.log('useEffect Project', modals)
     if (
       modals[MODALS.ADD_PROJECT_MODAL] === false ||
       modals[MODALS.EDIT_PROJECT_MODAL] === false

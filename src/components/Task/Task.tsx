@@ -31,7 +31,6 @@ export const Task = ({
   const { openModal, MODALS, modals } = useModal()
 
   useEffect(() => {
-    console.log('useEffect Task', modals)
     if (
       modals[MODALS.EDIT_TASK_MODAL] === false ||
       modals[MODALS.ADD_TASK_MODAL] === false

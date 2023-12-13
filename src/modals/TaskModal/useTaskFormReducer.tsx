@@ -39,8 +39,6 @@ export const useTaskFormReducer = (initialValue?: INewTask) => {
   )
 
   const handleTaskFormChange = (event: ChangeEvent) => {
-    console.log('handleTaskFormChange')
-
     const action = {
       name: event.target.name,
       value: event.target.value,
