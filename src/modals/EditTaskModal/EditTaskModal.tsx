@@ -27,6 +27,8 @@ export const EditTaskModal: React.FC<{
         id: modalOptions.id,
         projectId: Number(taskFormData.project_id) || null,
       })
+
+      closeModal()
     }
   }
 
