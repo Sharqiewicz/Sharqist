@@ -32,6 +32,8 @@ export const AddTaskModal: React.FC<{
     }
 
     await invoke('add_task', task)
+
+    closeModal()
   }
 
   if (!isOpen) return null
