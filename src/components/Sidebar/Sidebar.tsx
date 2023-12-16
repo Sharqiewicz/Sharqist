@@ -3,7 +3,6 @@ import { ReactElement, useMemo } from 'react'
 import { PathKeys, PATHS } from '../../router/paths'
 import {
   InboxIcon,
-  AddTaskIcon,
   TodayIcon,
   ClockIcon,
   CalendarOutlineIcon,
@@ -48,9 +47,45 @@ const PROJECTS_LIST: Subpage = {
   icon: <BookIcon />,
 }
 
+const CLEAN_CODE: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Clean Code',
+  icon: <BookIcon />,
+}
+
+const GIT_WORKFLOW: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Git Workflow',
+  icon: <BookIcon />,
+}
+
+const CLEAN_MERGE_REQUESTS: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Git Workflow',
+  icon: <BookIcon />,
+}
+
+const OWASP: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Git Workflow',
+  icon: <BookIcon />,
+}
+const DESIGN_PATTERNS: Subpage = {
+  path: PATHS.PROJECTS_LIST,
+  name: 'Design Patterns',
+  icon: <BookIcon />,
+}
+
 function Sidebar() {
   const SUBPAGES: Subpage[] = [INBOX, TODAY, HISTORY, UPCOMING]
   const PROJECT_SUBPAGES: Subpage[] = [PROJECTS_LIST]
+  const PROGRAMMER_SUBPAGES: Subpage[] = [
+    CLEAN_CODE,
+    GIT_WORKFLOW,
+    CLEAN_MERGE_REQUESTS,
+    OWASP,
+    DESIGN_PATTERNS,
+  ]
 
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (
@@ -67,6 +102,14 @@ function Sidebar() {
 
     return renderedSubpages
   }, [PROJECT_SUBPAGES])
+
+  const programmer_subpages = useMemo(() => {
+    const renderedSubpages = PROGRAMMER_SUBPAGES.map(subpage => (
+      <SidebarListItem key={subpage.name} subpage={subpage} />
+    ))
+
+    return renderedSubpages
+  }, [PROGRAMMER_SUBPAGES])
 
   const { isSidebarOpen } = useSidebar()
 
@@ -86,6 +129,8 @@ function Sidebar() {
         <ul className='space-y-2 font-medium'>{subpages}</ul>
         <hr className='my-3' />
         <ul className='space-y-2 font-medium'>{project_subpages}</ul>
+        <hr className='my-3' />
+        <ul className='space-y-2 font-medium'>{programmer_subpages}</ul>
       </div>
     </aside>
   )
