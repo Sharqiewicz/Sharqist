@@ -48,7 +48,7 @@ const PROJECTS_LIST: Subpage = {
 }
 
 const CLEAN_CODE: Subpage = {
-  path: PATHS.PROJECTS_LIST,
+  path: PATHS.CLEAN_CODE,
   name: 'Clean Code',
   icon: <BookIcon />,
 }
