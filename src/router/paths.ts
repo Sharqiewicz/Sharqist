@@ -7,6 +7,7 @@ export enum PATHS {
   HISTORY = 'history',
   UPCOMING = 'upcoming',
   PROJECTS_LIST = 'projects-list',
+  CLEAN_CODE = 'clean-code',
 }
 
 export type PathKeys = (typeof PATHS)[keyof typeof PATHS]
