@@ -6,11 +6,12 @@ import {
   TodayIcon,
   ClockIcon,
   CalendarOutlineIcon,
+  CodeIcon,
+  BookIcon,
 } from '../../assets/icons'
 import { useSidebar } from '../../hooks'
 
 import { SidebarListItem } from './SidebarListItem'
-import { BookIcon } from '../../assets/icons/BookIcon'
 export interface Subpage {
   path: PathKeys
   name: string
@@ -50,7 +51,7 @@ const PROJECTS_LIST: Subpage = {
 const CLEAN_CODE: Subpage = {
   path: PATHS.CLEAN_CODE,
   name: 'Clean Code',
-  icon: <BookIcon />,
+  icon: <CodeIcon />,
 }
 
 const GIT_WORKFLOW: Subpage = {
