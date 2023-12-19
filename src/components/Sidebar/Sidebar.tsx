@@ -8,6 +8,7 @@ import {
   CalendarOutlineIcon,
   CodeIcon,
   BookIcon,
+  GitIcon,
 } from '../../assets/icons'
 import { useSidebar } from '../../hooks'
 
@@ -57,7 +58,7 @@ const CLEAN_CODE: Subpage = {
 const GIT_WORKFLOW: Subpage = {
   path: PATHS.PROJECTS_LIST,
   name: 'Git Workflow',
-  icon: <BookIcon />,
+  icon: <GitIcon />,
 }
 
 const CLEAN_MERGE_REQUESTS: Subpage = {
