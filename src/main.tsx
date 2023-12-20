@@ -16,6 +16,7 @@ import {
   UpcomingPage,
   CleanCodePage,
   ProjectsPage,
+  DesignPatternsPage,
 } from './pages'
 
 import { ModalsProvider } from './modals/ModalsContext'
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path={PATHS.UPCOMING} element={<UpcomingPage />} />
       <Route path={PATHS.PROJECTS_LIST} element={<ProjectsPage />} />
       <Route path={PATHS.CLEAN_CODE} element={<CleanCodePage />} />
+      <Route path={PATHS.DESIGN_PATTERNS} element={<DesignPatternsPage />} />
       <Route path={PATHS.DEFAULT} element={<InboxPage />} />
     </>,
   ),

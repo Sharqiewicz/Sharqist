@@ -76,7 +76,7 @@ const OWASP: Subpage = {
   icon: <LockIcon />,
 }
 const DESIGN_PATTERNS: Subpage = {
-  path: PATHS.PROJECTS_LIST,
+  path: PATHS.DESIGN_PATTERNS,
   name: 'Design Patterns',
   icon: <LayersIcon />,
 }
