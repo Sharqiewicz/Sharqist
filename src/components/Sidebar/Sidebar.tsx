@@ -61,13 +61,13 @@ const GIT_WORKFLOW: Subpage = {
 
 const CLEAN_MERGE_REQUESTS: Subpage = {
   path: PATHS.PROJECTS_LIST,
-  name: 'Git Workflow',
+  name: 'Merge Request',
   icon: <BookIcon />,
 }
 
 const OWASP: Subpage = {
   path: PATHS.PROJECTS_LIST,
-  name: 'Git Workflow',
+  name: 'OWASP',
   icon: <BookIcon />,
 }
 const DESIGN_PATTERNS: Subpage = {
