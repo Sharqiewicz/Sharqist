@@ -18,6 +18,8 @@ use endpoints::{
 };
 
 fn main() -> Result<()> {
+    let _ = fix_path_env::fix();
+
     let connection: Connection = open_database_connection();
 
     if !does_table_exist(&connection, "tasks")? {
