@@ -9,6 +9,8 @@ import {
   CodeIcon,
   BookIcon,
   GitIcon,
+  MergeIcon,
+  LockIcon,
 } from '../../assets/icons'
 import { useSidebar } from '../../hooks'
 
@@ -64,13 +66,13 @@ const GIT_WORKFLOW: Subpage = {
 const CLEAN_MERGE_REQUESTS: Subpage = {
   path: PATHS.PROJECTS_LIST,
   name: 'Merge Request',
-  icon: <BookIcon />,
+  icon: <MergeIcon />,
 }
 
 const OWASP: Subpage = {
   path: PATHS.PROJECTS_LIST,
   name: 'OWASP',
-  icon: <BookIcon />,
+  icon: <LockIcon />,
 }
 const DESIGN_PATTERNS: Subpage = {
   path: PATHS.PROJECTS_LIST,
