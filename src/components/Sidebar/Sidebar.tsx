@@ -11,6 +11,7 @@ import {
   GitIcon,
   MergeIcon,
   LockIcon,
+  LayersIcon,
 } from '../../assets/icons'
 import { useSidebar } from '../../hooks'
 
@@ -77,7 +78,7 @@ const OWASP: Subpage = {
 const DESIGN_PATTERNS: Subpage = {
   path: PATHS.PROJECTS_LIST,
   name: 'Design Patterns',
-  icon: <BookIcon />,
+  icon: <LayersIcon />,
 }
 
 function Sidebar() {
