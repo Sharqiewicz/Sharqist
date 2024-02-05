@@ -46,6 +46,8 @@ export const TaskForm: React.FC<TaskFormProps> = ({
       />
     </div>
     <Description handleChange={handleChange} value={taskFormData.description} />
-    <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
+    <div className='flex items-center justify-center mt-5 mb-2'>
+      <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
+    </div>
   </form>
 )

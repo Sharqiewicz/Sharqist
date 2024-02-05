@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { useFetchProjects } from '../../hooks/useFetchProjects'
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 export const ProjectsList = ({
-  value,
+  value = -1,
   handleChange,
 }: {
   value?: number
@@ -11,28 +12,57 @@ export const ProjectsList = ({
 }) => {
   const { projects } = useFetchProjects()
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleSelect = (id: number) => {
+    handleChange({
+      target: { name: 'project_id', value: id },
+    } as unknown as ChangeEvent)
+    setIsOpen(false)
+  }
+
+  const currentProjectName =
+    projects.find(project => project.id === value)?.name || 'None'
+
   return (
-    <div className='mt-5 ml-2 w-44'>
+    <div className='mt-5 ml-2 overflow-hidden w-44'>
       <label
         htmlFor='project_id'
-        className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+        className='mb-2 text-sm font-medium text-white'
       >
         Project
       </label>
-      <select
-        value={value}
-        onChange={e => handleChange(e as unknown as ChangeEvent)}
-        id='project_id'
-        name='project_id'
-        className='w-44 text-ellipsis overflow-hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+      <div
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
       >
-        <option key='none'>None</option>
-        {projects.map(project => (
-          <option key={project.id} value={project.id}>
-            {project.name}
-          </option>
-        ))}
-      </select>
+        <button
+          id='project_id'
+          name='project_id'
+          type='button'
+          className='whitespace-nowrap text-ellipsis border border-gray-300 text-sm rounded-lg text-start focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500'
+          aria-haspopup='listbox'
+        >
+          {currentProjectName}
+        </button>
+        {isOpen && (
+          <ul
+            role='listbox'
+            className='absolute border w-full border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500'
+          >
+            <li className='py-2 text-start'>
+              <button onClick={() => handleSelect(-1)}>None</button>
+            </li>
+            {projects.map(project => (
+              <li key={project.id} className='py-2 text-start'>
+                <button onClick={() => handleSelect(project.id)}>
+                  {project.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

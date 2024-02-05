@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import './index.css'
+import './ovzocss/index.css'
 
 import {
   HistoryPage,

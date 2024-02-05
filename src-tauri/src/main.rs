@@ -16,6 +16,7 @@ use endpoints::{
     get_all_tasks, get_future_tasks, get_history_tasks, get_inbox_tasks, get_today_tasks,
     set_task_done, set_task_undone,
 };
+use tauri::Manager;
 
 fn main() -> Result<()> {
     let _ = fix_path_env::fix();

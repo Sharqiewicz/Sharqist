@@ -40,6 +40,8 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({
       handleChange={handleChange}
       value={projectFormData.description}
     />
-    <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
+    <div className='flex items-center justify-center mt-5 mb-2'>
+      <ButtonPrimary {...{ text: buttonText, svg: <ButtonSVG /> }} />
+    </div>
   </form>
 )

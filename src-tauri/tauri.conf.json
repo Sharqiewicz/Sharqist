@@ -18,6 +18,13 @@
       }
     },
     "bundle": {
+      "macOS": {
+        "entitlements": "./entitlements.mac.plist",
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
       "active": true,
       "targets": "all",
       "identifier": "sharqist",

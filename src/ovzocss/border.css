@@ -1,0 +1,7 @@
+.border-color-dark-blue {
+  border-color: var(--color-dark-blue);
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis !important;
+}

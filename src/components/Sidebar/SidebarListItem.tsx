@@ -12,7 +12,7 @@ const SidebarListItem = ({ subpage }: SidebarListItemProps) => (
     >
       {subpage.icon}
       <div className='m-1'></div>
-      {subpage.name}
+      <p className='font-h5'>{subpage.name}</p>
     </a>
   </li>
 )

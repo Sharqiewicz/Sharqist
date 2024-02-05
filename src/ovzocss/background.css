@@ -1,0 +1,26 @@
+.background-gray {
+  background-color: var(--color-gray);
+}
+
+.background-dark-gray {
+  background-color: var(--color-dark-gray);
+}
+.background-yellow {
+  background-color: var(--color-yellow);
+}
+
+.background-dark-yellow {
+  background-color: var(--color-dark-yellow);
+}
+
+.background-dark-blue {
+  background-color: var(--color-dark-blue);
+}
+
+.background-white {
+  background-color: #ffffff;
+}
+
+.background-black {
+  background-color: #000000;
+}

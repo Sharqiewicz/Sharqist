@@ -25,7 +25,7 @@ function TodayView() {
         <button
           onClick={() => openModal(MODALS.ADD_TASK_MODAL)}
           type='button'
-          className='button-first'
+          className='button-secondary'
         >
           Add Task
         </button>

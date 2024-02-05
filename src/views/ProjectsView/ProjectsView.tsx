@@ -19,11 +19,11 @@ function ProjectsView() {
 
       <hr className='my-5' />
 
-      <div className='flex justify-center w-full'>
+      <div className='flex flex-wrap justify-center w-full'>
         <button
           onClick={() => openModal(MODALS.ADD_PROJECT_MODAL)}
           type='button'
-          className='button-first'
+          className='button-secondary text-bold'
         >
           Add Project
         </button>

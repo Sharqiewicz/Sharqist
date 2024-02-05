@@ -9,11 +9,7 @@ const ButtonPrimary = ({
   svg: ReactNode
   onClick?: () => void
 }) => (
-  <button
-    type='submit'
-    className='flex items-center justify-center w-full mt-5 button-first'
-    onClick={onClick}
-  >
+  <button type='submit' className='flex button-third' onClick={onClick}>
     {svg}
     {text}
   </button>

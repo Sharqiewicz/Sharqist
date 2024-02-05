@@ -92,6 +92,8 @@ function Sidebar() {
     DESIGN_PATTERNS,
   ]
 
+  console.log(PROGRAMMER_SUBPAGES)
+
   const subpages = useMemo(() => {
     const renderedSubpages = SUBPAGES.map(subpage => (
       <SidebarListItem key={subpage.name} subpage={subpage} />
@@ -108,34 +110,32 @@ function Sidebar() {
     return renderedSubpages
   }, [PROJECT_SUBPAGES])
 
-  const programmer_subpages = useMemo(() => {
-    const renderedSubpages = PROGRAMMER_SUBPAGES.map(subpage => (
-      <SidebarListItem key={subpage.name} subpage={subpage} />
-    ))
+  // const programmer_subpages = useMemo(() => {
+  //   const renderedSubpages = PROGRAMMER_SUBPAGES.map(subpage => (
+  //     <SidebarListItem key={subpage.name} subpage={subpage} />
+  //   ))
 
-    return renderedSubpages
-  }, [PROGRAMMER_SUBPAGES])
+  //   return renderedSubpages
+  // }, [PROGRAMMER_SUBPAGES])
 
   const { isSidebarOpen } = useSidebar()
 
   const asideClass = `z-30 ${
-    isSidebarOpen ? 'w-full' : 'w-0 sm:w-52'
-  } top-0 h-screen fixed overflow-hidden duration-300 ease-in-out`
+    isSidebarOpen ? 'w-full' : 'w-0 sm:w-56'
+  } top-0 h-screen fixed overflow-hidden duration-300 ease-in-out hide-scroll`
 
   return (
     <aside className={asideClass}>
-      <div className='h-full px-3 py-4 overflow-y-scroll bg-gray-50 dark:bg-gray-800'>
+      <div className='h-screen px-3 py-4 overflow-y-scroll background-dark-blue'>
         <div className='flex mb-5 ms-2 md:me-24'>
           <img src='./sharqist.svg' className='h-8 me-3' alt='Sharqist Logo' />
           <span className='self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white'>
             Sharqist
           </span>
         </div>
-        <ul className='space-y-2 font-medium'>{subpages}</ul>
+        <ul className='space-y-2'>{subpages}</ul>
         <hr className='my-3' />
         <ul className='space-y-2 font-medium'>{project_subpages}</ul>
-        <hr className='my-3' />
-        <ul className='space-y-2 font-medium'>{programmer_subpages}</ul>
       </div>
     </aside>
   )

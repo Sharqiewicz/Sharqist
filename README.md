@@ -1,4 +1,6 @@
-![Sharqist Logo](./public/sharqist-with-text.svg)
+![Sharqist Logo](./public/sharqist.svg)
+
+# Sharqist
 
 The inspiration behind creating this tool stemmed from my tendency to overlook adding completed features and tasks to my timesheet, leading to significant time spent at the end of each month trying to recall my activities. Additionally, I sought a solution that would provide a checklist to ensure that my current code adheres to best practices.
 
@@ -31,30 +33,26 @@ Monitor completed tasks and track your progress over time.
 
 ![History](./readme_assets/history.png)
 
+## Upcoming
+
+Keep track of your future tasks and plan your work ahead of time.
+</br> (This allows you to easily organize and prioritize your tasks)
+
+![Upcoming](./readme_assets/upcoming.png)
+
 ## Projects
 
 Structure your tasks by grouping them into projects. This feature streamlines the management of related tasks, enhancing overall work efficiency.
 
 ![Projects](./readme_assets/projects.png)
 
-## Add Tasks to Projects
-
-Streamline task assignment to projects effortlessly. This feature enables quick task allocation to projects, ensuring a well-organized task management system.
-
-![Add Tasks to Projects](./readme_assets/add_tasks_to_projects.png)
-![Add Tasks to Projects](./readme_assets/tasks_with_projects.png)
-
-# Clean Code Checklist
+##### Ongoing Clean Code Checklist
 
 Adopt best practices for crafting clean, maintainable code. Sharqist presents a comprehensive checklist to guide you in adhering to clean code principles.
 
-![Clean Code Checklist](./readme_assets/clean_code_checklist.png)
-
-## Design Patterns Checklist
+##### Ongoing Design Patterns Checklist
 
 Optimize code structure with proven design patterns. Sharqist provides a checklist of common design patterns, empowering you to write efficient and maintainable code.
-
-![Design Patterns Checklist](./readme_assets/design_patterns_checklist.png)
 
 ##### Ongoing Clean Git Checklist
 
@@ -80,5 +78,16 @@ cd sharqist
 npm install
 npx tauri dev
 ```
+
+or
+
+```bash
+git clone https://github.com/yourusername/sharqist.git
+cd sharqist
+npm install
+npx tauri build
+```
+
+and open the contents of the Sharqist in the Finder, then open the MacOS directory and run the app!
 
 ### 🎉 Enjoy using Sharqist! 🎉

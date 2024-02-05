@@ -8,17 +8,15 @@ interface MainTemplateProps {
 
 const MainTemplate: FC<MainTemplateProps> = ({ children }) => {
   return (
-    <>
+    <div className='min-h-full min-h-screen background-yellow'>
       <Navbar />
       <div className='h-16 sm:h-0'></div>
       <div className='flex flex-row'>
         <Sidebar />
 
-        <main className='w-full p-5 sm:w-2/3 md:w-3/4 sm:ml-52'>
-          {children}
-        </main>
+        <main className='w-full p-5 sm:ml-56'>{children}</main>
       </div>
-    </>
+    </div>
   )
 }
 

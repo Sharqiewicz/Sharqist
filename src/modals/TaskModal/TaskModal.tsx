@@ -37,7 +37,7 @@ export const TaskModal = ({
   >
     <div className='fixed top-0 bottom-0 left-0 right-0 bg-black opacity-80'></div>
     <div className='relative w-full max-w-md max-h-full p-4'>
-      <div className='fixed w-2/5 bg-gray-900 rounded-lg shadow min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
+      <div className='fixed w-2/5 rounded-lg shadow background-dark-blue min-w-min z-60 top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4'>
         <ModalHeader closeModal={closeModal} text={texts.title} />
         <TaskForm
           taskFormData={taskFormData}

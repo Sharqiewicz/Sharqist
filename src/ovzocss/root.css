@@ -1,0 +1,20 @@
+:root {
+  --color-gray: #eeeeee;
+  --color-dark-gray: #393e46;
+  --color-yellow: #ffd369;
+  --color-dark-yellow: #ac8e48;
+  --color-dark-blue: #222831;
+
+  --font-size: 16px;
+  --font-size-small: 0.875rem;
+  --font-h1: 2rem;
+  --font-h2: 1.75rem;
+  --font-h3: 1.5rem;
+  --font-h4: 1.25rem;
+  --font-h5: 1.125rem;
+  font-size: var(--font-size);
+}
+
+body {
+  font-family: Menlo, Monaco, 'Courier New', Courier, monospace;
+}
