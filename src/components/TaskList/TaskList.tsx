@@ -20,6 +20,7 @@ function TasksList({ tasks, forceTasksFetchUpdate }: TasksListProps) {
       <>
         {tasks.map(task => {
           const showLine = lastDate ? areDatesDifferent(lastDate, new Date(task.date)) : false
+
           setLastDate(task.date);
 
           return (
